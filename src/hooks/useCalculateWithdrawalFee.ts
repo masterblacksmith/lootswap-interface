@@ -44,7 +44,16 @@ export default function useCalculateWithdrawalFee(
   const lastWithdrawBlock = userInfo?.[3]
   const firstDepositBlock = userInfo?.[4]
   const blockDelta = userInfo?.[5]
-  //const lastDepositBlock = userInfo?.[6]
+  const lastDepositBlock = userInfo?.[6]
+
+  if (
+    lastWithdrawBlock.eq(BigNumber.from(0)) &&
+    firstDepositBlock.eq(BigNumber.from(0)) &&
+    blockDelta.eq(BigNumber.from(0)) &&
+    lastDepositBlock.eq(BigNumber.from(0))
+  ) {
+    return { lastActionBlock: undefined, withdrawalFee: undefined }
+  }
 
   let lastActionBlock: BigNumber | undefined = undefined
   let currentBlockDelta: BigNumber = blockDelta
