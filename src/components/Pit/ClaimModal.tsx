@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react'
-import { JSBI } from '@venomswap/sdk'
 import Modal from '../Modal'
 import { AutoColumn } from '../Column'
 import styled from 'styled-components'
@@ -12,8 +11,6 @@ import { TransactionResponse } from '@ethersproject/providers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import { calculateGasMargin } from '../../utils'
-import { STAKING_REWARDS_INFO } from '../../constants/staking'
-import { Blockchain, ChainId } from '@venomswap/sdk'
 import { abi as IUniswapV2PairABI } from '@venomswap/core/build/IUniswapV2Pair.json'
 import { Interface } from '@ethersproject/abi'
 import { useMultipleContractSingleData } from '../../state/multicall/hooks'
@@ -21,7 +18,8 @@ import { toV2LiquidityToken } from '../../state/user/hooks'
 import { PIT_SETTINGS } from '../../constants'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
 import useBlockchain from '../../hooks/useBlockchain'
-import { BRIDGED_ROT, BRIDGED_MAGGOT } from '../../constants/tokens'
+import { PIT_POOLS } from '../../constants/pit'
+import useEligiblePitPools from '../../hooks/useEligiblePitPools'
 
 const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
 
@@ -32,23 +30,6 @@ const ContentWrapper = styled(AutoColumn)`
 interface ClaimModalProps {
   isOpen: boolean
   onDismiss: () => void
-}
-
-function toValidLiquidityTokenAddress(blockchain: Blockchain, chainId: ChainId, item: any): string | undefined {
-  if (item.tokens[0].decimals !== 18 || item.tokens[1].decimals !== 18) {
-    return undefined
-  }
-
-  const liquidityToken = toV2LiquidityToken(item.tokens)
-  const skipTokens = [BRIDGED_ROT[chainId].address, BRIDGED_MAGGOT[chainId].address]
-
-  if (blockchain === Blockchain.HARMONY) {
-    if (skipTokens.includes(item.tokens[0].address) || skipTokens.includes(item.tokens[1].address)) {
-      return undefined
-    }
-  }
-
-  return liquidityToken.address
 }
 
 export default function ClaimModal({ isOpen, onDismiss }: ClaimModalProps) {
@@ -72,41 +53,23 @@ export default function ClaimModal({ isOpen, onDismiss }: ClaimModalProps) {
   }
 
   const pitBreeder = usePitBreederContract()
-  const stakingPools = useMemo(() => (chainId ? STAKING_REWARDS_INFO[chainId] : []), [chainId])
+  const stakingPools = useMemo(() => (chainId ? PIT_POOLS[chainId] : []), [chainId])
 
   const liquidityTokenAddresses = useMemo(
     () =>
       stakingPools
         ? stakingPools.map(item => {
-            return blockchain && chainId && item ? toValidLiquidityTokenAddress(blockchain, chainId, item) : undefined
+            return blockchain && chainId && item ? toV2LiquidityToken(item.tokens)?.address : undefined
           })
         : [],
     [blockchain, chainId, stakingPools]
   ).filter(address => address !== undefined)
 
-  const results = useMultipleContractSingleData(liquidityTokenAddresses, PAIR_INTERFACE, 'balanceOf', [
+  const balanceResults = useMultipleContractSingleData(liquidityTokenAddresses, PAIR_INTERFACE, 'balanceOf', [
     pitBreeder?.address
   ])
 
-  const minimumAmountWei = 10000000000000000 // 0.01
-
-  const [claimFrom, claimTo] = useMemo<string[][]>(() => {
-    const claimFrom: string[] = []
-    const claimTo: string[] = []
-
-    for (let index = 0; stakingPools && index < stakingPools.length; index++) {
-      const stakingPool = stakingPools[index]
-      const result = results[index]
-      if (result && !result.loading) {
-        if (JSBI.GT(JSBI.BigInt(result?.result?.[0]), minimumAmountWei)) {
-          claimFrom.push(stakingPool.tokens[0].address)
-          claimTo.push(stakingPool.tokens[1].address)
-        }
-      }
-    }
-
-    return [claimFrom, claimTo]
-  }, [stakingPools, results])
+  const [claimFrom, claimTo] = useEligiblePitPools(stakingPools, balanceResults)
 
   const rewardsAreClaimable = claimFrom.length > 0 && claimTo.length > 0
 
@@ -114,25 +77,31 @@ export default function ClaimModal({ isOpen, onDismiss }: ClaimModalProps) {
     if (pitBreeder) {
       setAttempting(true)
 
-      const estimatedGas = await pitBreeder.estimateGas.convertMultiple(claimFrom, claimTo)
+      try {
+        const estimatedGas = await pitBreeder.estimateGas.convertMultiple(claimFrom, claimTo)
 
-      await pitBreeder
-        .convertMultiple(claimFrom, claimTo, {
-          gasLimit: calculateGasMargin(estimatedGas)
-        })
-        .then((response: TransactionResponse) => {
-          addTransaction(response, {
-            summary: `Claim ${pitSettings?.name} rewards`
+        await pitBreeder
+          .convertMultiple(claimFrom, claimTo, {
+            gasLimit: calculateGasMargin(estimatedGas)
           })
-          setHash(response.hash)
-        })
-        .catch((error: any) => {
-          setAttempting(false)
-          if (error?.code === -32603) {
-            setFailed(true)
-          }
-          console.log(error)
-        })
+          .then((response: TransactionResponse) => {
+            addTransaction(response, {
+              summary: `Claim ${pitSettings?.name} rewards`
+            })
+            setHash(response.hash)
+          })
+          .catch((error: any) => {
+            setAttempting(false)
+            if (error?.code === -32603) {
+              setFailed(true)
+            }
+            console.log(error)
+          })
+      } catch (error) {
+        setAttempting(false)
+        setFailed(true)
+        console.log(error)
+      }
     }
   }
 
