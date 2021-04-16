@@ -5,6 +5,7 @@ import {
   HARMONY_BSC_BRIDGED_BUSD,
   BRIDGED_ETH,
   BRIDGED_USDC,
+  LINK,
   BRIDGED_ROT,
   BRIDGED_MAGGOT,
   BRIDGED_WISE,
@@ -57,6 +58,10 @@ export const STAKING_REWARDS_INFO: {
     {
       tokens: [BRIDGED_DSLA[ChainId.HARMONY_MAINNET], GOVERNANCE_TOKEN[ChainId.HARMONY_MAINNET]],
       pid: 9
+    },
+    {
+      tokens: [LINK[ChainId.HARMONY_MAINNET], GOVERNANCE_TOKEN[ChainId.HARMONY_MAINNET]],
+      pid: 10
     }
   ],
   [ChainId.HARMONY_TESTNET]: [
