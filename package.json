@@ -51,7 +51,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "ethers": "^5.1.0",
+    "ethers": "=5.1.0",
     "i18next": "^15.0.9",
     "i18next-browser-languagedetector": "^3.0.1",
     "i18next-xhr-backend": "^2.0.1",
@@ -128,6 +128,6 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@venomswap/default-token-list": "^1.7.0"
+    "@venomswap/default-token-list": "^1.8.5"
   }
 }

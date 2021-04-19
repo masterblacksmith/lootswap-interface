@@ -216,3 +216,21 @@ export const BRIDGED_DSLA: { [chainId in ChainId]: Token } = {
   ),
   [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, '1DSLA', 'DSLA')
 }
+
+export const BRIDGED_AAVE: { [chainId in ChainId]: Token } = {
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, ZERO_ONE_ADDRESS, 18, '1AAVE', 'Aave Token'),
+  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, ZERO_ONE_ADDRESS, 18, '1AAVE', 'Aave Token'),
+  [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, ZERO_ONE_ADDRESS, 18, '1AAVE', 'Aave Token'),
+  [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, ZERO_ONE_ADDRESS, 18, '1AAVE', 'Aave Token'),
+  [ChainId.KOVAN]: new Token(ChainId.KOVAN, ZERO_ONE_ADDRESS, 18, '1AAVE', 'Aave Token'),
+  [ChainId.BSC_MAINNET]: new Token(ChainId.BSC_MAINNET, ZERO_ONE_ADDRESS, 18, '1AAVE', 'Aave Token'),
+  [ChainId.BSC_TESTNET]: new Token(ChainId.BSC_TESTNET, ZERO_ONE_ADDRESS, 18, '1AAVE', 'Aave Token'),
+  [ChainId.HARMONY_MAINNET]: new Token(
+    ChainId.HARMONY_MAINNET,
+    '0xcF323Aad9E522B93F11c352CaA519Ad0E14eB40F',
+    18,
+    '1AAVE',
+    'Aave Token'
+  ),
+  [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, '1AAVE', 'DSLA')
+}
