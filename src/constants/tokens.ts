@@ -232,5 +232,23 @@ export const BRIDGED_AAVE: { [chainId in ChainId]: Token } = {
     '1AAVE',
     'Aave Token'
   ),
-  [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, '1AAVE', 'DSLA')
+  [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, '1AAVE', 'Aave Token')
+}
+
+export const BRIDGED_SNX: { [chainId in ChainId]: Token } = {
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, ZERO_ONE_ADDRESS, 18, '1SNX', 'Synthetix Network Token'),
+  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, ZERO_ONE_ADDRESS, 18, '1SNX', 'Synthetix Network Token'),
+  [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, ZERO_ONE_ADDRESS, 18, '1SNX', 'Synthetix Network Token'),
+  [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, ZERO_ONE_ADDRESS, 18, '1SNX', 'Synthetix Network Token'),
+  [ChainId.KOVAN]: new Token(ChainId.KOVAN, ZERO_ONE_ADDRESS, 18, '1SNX', 'Synthetix Network Token'),
+  [ChainId.BSC_MAINNET]: new Token(ChainId.BSC_MAINNET, ZERO_ONE_ADDRESS, 18, '1SNX', 'Synthetix Network Token'),
+  [ChainId.BSC_TESTNET]: new Token(ChainId.BSC_TESTNET, ZERO_ONE_ADDRESS, 18, '1SNX', 'Synthetix Network Token'),
+  [ChainId.HARMONY_MAINNET]: new Token(
+    ChainId.HARMONY_MAINNET,
+    '0x7b9c523d59AeFd362247Bd5601A89722e3774dD2',
+    18,
+    '1SNX',
+    'Aave Token'
+  ),
+  [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, '1SNX', 'DSLA')
 }
