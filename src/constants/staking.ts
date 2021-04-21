@@ -59,6 +59,10 @@ export const STAKING_REWARDS_INFO: {
     {
       pid: 12,
       tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, '1SNX/VIPER')
+    },
+    {
+      pid: 13,
+      tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, '1YFI/VIPER')
     }
   ],
   [ChainId.HARMONY_TESTNET]: [
