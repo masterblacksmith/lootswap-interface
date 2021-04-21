@@ -1,5 +1,6 @@
 import React from 'react'
-import { WETH, JSBI, BLOCKCHAIN_SETTINGS } from '@venomswap/sdk'
+import { WETH, JSBI } from '@venomswap/sdk'
+import { BLOCKCHAIN_SETTINGS } from '@venomswap/sdk-extra'
 import { AutoColumn } from '../../components/Column'
 import styled from 'styled-components'
 import { STAKING_REWARDS_INFO } from '../../constants/staking'
@@ -80,7 +81,7 @@ export default function Earn() {
   const stakingRewardsExist = Boolean(typeof chainId === 'number' && (STAKING_REWARDS_INFO[chainId]?.length ?? 0) > 0)
 
   const baseEmissions = useBaseStakingRewardsEmission()
-  const blocksPerMinute = blockchainSettings ? 60 / blockchainSettings.defaultBlockTime() : 0
+  const blocksPerMinute = blockchainSettings?.blockTime ? 60 / blockchainSettings.blockTime : 0
   const emissionsPerMinute =
     baseEmissions && blockchainSettings ? baseEmissions.multiply(JSBI.BigInt(blocksPerMinute)) : undefined
 

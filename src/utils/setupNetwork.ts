@@ -1,4 +1,4 @@
-import { NETWORK_URL, NETWORK_CHAIN_ID } from '../connectors'
+import { NETWORK_CHAIN_ID } from '../connectors'
 import getNetworkSettings from './getNetworkSettings'
 
 /**
@@ -7,8 +7,7 @@ import getNetworkSettings from './getNetworkSettings'
  * @returns {boolean} true if the setup succeeded, false otherwise
  */
 export default async function setupNetwork(): Promise<boolean> {
-  const rpcUrls = [String(NETWORK_URL)]
-  const settings = getNetworkSettings(NETWORK_CHAIN_ID, rpcUrls)
+  const settings = getNetworkSettings(NETWORK_CHAIN_ID)
   const provider = (window as Window)?.ethereum
 
   if (provider) {

@@ -1,59 +1,18 @@
 import { ChainId } from '@venomswap/sdk'
+import { BLOCKCHAIN_SETTINGS } from '@venomswap/sdk-extra'
 
-// TODO: Update this to use blockchainSettings from @venomswap/sdk
-export default function getNetworkSettings(chainId: number, rpcUrls: string[]): Record<string, any> {
-  const bscMainnet = {
-    chainId: `0x${chainId?.toString(16)}`,
-    chainName: 'Binance Smart Chain Mainnet',
+export default function getNetworkSettings(chainId: ChainId, rpcUrls?: string[]): Record<string, any> {
+  const settings = BLOCKCHAIN_SETTINGS[chainId]
+
+  return {
+    chainId: settings.hexChainId(),
+    chainName: settings.name,
     nativeCurrency: {
-      name: 'BNB',
-      symbol: 'BNB',
-      decimals: 18
+      name: settings.currency?.name,
+      symbol: settings.currency?.symbol,
+      decimals: settings.currency?.decimals
     },
-    rpcUrls: rpcUrls,
-    blockExplorerUrls: ['https://bscscan.com/']
-  }
-
-  switch (chainId) {
-    case ChainId.BSC_TESTNET:
-      return {
-        chainId: `0x${chainId?.toString(16)}`,
-        chainName: 'Binance Smart Chain Testnet',
-        nativeCurrency: {
-          name: 'BNB',
-          symbol: 'BNB',
-          decimals: 18
-        },
-        rpcUrls: rpcUrls,
-        blockExplorerUrls: ['https://testnet.bscscan.com/']
-      }
-    case ChainId.BSC_MAINNET:
-      return bscMainnet
-    case ChainId.HARMONY_MAINNET:
-      return {
-        chainId: `0x${chainId?.toString(16)}`,
-        chainName: 'Harmony Mainnet',
-        nativeCurrency: {
-          name: 'ONE',
-          symbol: 'ONE',
-          decimals: 18
-        },
-        rpcUrls: rpcUrls,
-        blockExplorerUrls: ['https://explorer.harmony.one/#/']
-      }
-    case ChainId.HARMONY_TESTNET:
-      return {
-        chainId: `0x${chainId?.toString(16)}`,
-        chainName: 'Harmony Testnet',
-        nativeCurrency: {
-          name: 'ONE',
-          symbol: 'ONE',
-          decimals: 18
-        },
-        rpcUrls: rpcUrls,
-        blockExplorerUrls: ['https://explorer.testnet.harmony.one/#/']
-      }
-    default:
-      return bscMainnet
+    rpcUrls: rpcUrls ? rpcUrls : settings.rpcURLs,
+    blockExplorerUrls: [settings.explorerURL]
   }
 }

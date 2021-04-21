@@ -1,9 +1,9 @@
-import { Currency, currencyEquals, JSBI, Price, WETH } from '@venomswap/sdk'
+import { Currency, currencyEquals, JSBI, Token, Price, WETH } from '@venomswap/sdk'
 import { useMemo } from 'react'
-import { BUSD } from '../constants/tokens'
 import { PairState, usePairs } from '../data/Reserves'
 import { useActiveWeb3React } from '.'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
+import getToken from '../utils/getToken'
 
 /**
  * Returns the price in BUSD of the input currency
@@ -12,7 +12,7 @@ import { wrappedCurrency } from '../utils/wrappedCurrency'
 export default function useBUSDPrice(currency?: Currency): Price | undefined {
   const { chainId } = useActiveWeb3React()
   const wrapped = wrappedCurrency(currency, chainId)
-  const busd = chainId && BUSD[chainId]
+  const busd: Token | undefined = getToken(chainId, 'BUSD')
 
   const tokenPairs: [Currency | undefined, Currency | undefined][] = useMemo(
     () => [

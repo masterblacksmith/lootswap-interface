@@ -11,7 +11,6 @@ import {
 } from '@venomswap/sdk'
 import { useMemo } from 'react'
 import { STAKING_REWARDS_INFO } from '../../constants/staking'
-import { HARMONY_BSC_BRIDGED_BUSD } from '../../constants/tokens'
 import { useActiveWeb3React } from '../../hooks'
 //import { NEVER_RELOAD, useMultipleContractSingleData } from '../multicall/hooks'
 import { useSingleCallResult, useSingleContractMultipleData } from '../multicall/hooks'
@@ -29,6 +28,7 @@ import getBlocksPerYear from '../../utils/getBlocksPerYear'
 import calculateTotalStakedAmount from '../../utils/calculateTotalStakedAmount'
 import getPair from '../../utils/getPair'
 import calculateApr from '../../utils/calculateApr'
+import getToken from '../../utils/getToken'
 
 //import { useTotalSupply } from '../../data/TotalSupply'
 //import { useBlockNumber } from '../application/hooks'
@@ -106,7 +106,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
   const govTokenWethPrice = useGovernanceTokenWethPrice()
   const govTokenBusdPrice = useBUSDPrice(govToken)
 
-  const bscBUSD = chainId && HARMONY_BSC_BRIDGED_BUSD[chainId]
+  const bscBUSD: Token | undefined = getToken(chainId, 'bscBUSD')
   const bscBUSDPrice = useBUSDPrice(bscBUSD)
 
   const blocksPerYear = getBlocksPerYear(chainId)
@@ -273,14 +273,14 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
           )
 
           let tokenPrice: Price | undefined
-          switch (baseToken) {
-            case weth:
+          switch (baseToken.symbol?.toUpperCase()) {
+            case weth.symbol?.toUpperCase():
               tokenPrice = govTokenWethPrice
               break
-            case govToken:
+            case govToken.symbol?.toUpperCase():
               tokenPrice = govTokenBusdPrice
               break
-            case bscBUSD:
+            case bscBUSD?.symbol?.toUpperCase():
               tokenPrice = bscBUSDPrice
               break
             default:
