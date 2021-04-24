@@ -71,6 +71,10 @@ export const STAKING_REWARDS_INFO: {
     {
       pid: 15,
       tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'bscCAKE/VIPER')
+    },
+    {
+      pid: 16,
+      tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, '1SUSHI/VIPER')
     }
   ],
   [ChainId.HARMONY_TESTNET]: [
