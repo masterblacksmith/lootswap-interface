@@ -29,6 +29,7 @@ import calculateTotalStakedAmount from '../../utils/calculateTotalStakedAmount'
 import getPair from '../../utils/getPair'
 import calculateApr from '../../utils/calculateApr'
 import getToken from '../../utils/getToken'
+import validStakingInfo from '../../utils/validStakingInfo'
 
 //import { useTotalSupply } from '../../data/TotalSupply'
 //import { useBlockNumber } from '../application/hooks'
@@ -179,38 +180,34 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
       const specificPoolRewardsPerBlock = poolRewardsPerBlock[index + 1]
 
       if (
-        tokens &&
-        poolInfo &&
-        !poolInfo.loading &&
-        pendingReward &&
-        !pendingReward.loading &&
-        userInfo &&
-        !userInfo.loading &&
-        baseRewardsPerBlock &&
-        !baseRewardsPerBlock.loading &&
-        specificPoolRewardsPerBlock &&
-        !specificPoolRewardsPerBlock.loading &&
-        lpTokenTotalSupply &&
-        !lpTokenTotalSupply.loading &&
-        lpTokenReserve &&
-        !lpTokenReserve.loading &&
-        lpTokenBalance &&
-        !lpTokenBalance.loading
+        validStakingInfo(
+          tokens,
+          poolInfo,
+          pendingReward,
+          userInfo,
+          baseRewardsPerBlock,
+          specificPoolRewardsPerBlock,
+          lockRewardsRatio,
+          lpTokenTotalSupply,
+          lpTokenReserve,
+          lpTokenBalance,
+          startBlock
+        )
       ) {
         if (poolInfo.error || userInfo.error || pendingReward.error) {
           //console.error('Failed to load staking rewards info')
           return memo
         }
 
-        const baseBlockRewards = new TokenAmount(govToken, JSBI.BigInt(baseRewardsPerBlock?.result?.[0]))
+        const baseBlockRewards = new TokenAmount(govToken, JSBI.BigInt(baseRewardsPerBlock?.result?.[0] ?? 0))
 
         const poolBlockRewards = specificPoolRewardsPerBlock?.result?.[0]
-          ? new TokenAmount(govToken, JSBI.BigInt(specificPoolRewardsPerBlock?.result?.[0]))
+          ? new TokenAmount(govToken, JSBI.BigInt(specificPoolRewardsPerBlock?.result?.[0] ?? 0))
           : baseBlockRewards
 
         const poolShare = new Fraction(poolBlockRewards.raw, baseBlockRewards.raw)
 
-        const lockedRewardsPercentageUnits = Number(lockRewardsRatio.result?.[0])
+        const lockedRewardsPercentageUnits = Number(lockRewardsRatio.result?.[0] ?? 0)
         const unlockedRewardsPercentageUnits = 100 - lockedRewardsPercentageUnits
 
         const calculatedTotalPendingRewards = JSBI.BigInt(pendingReward?.result?.[0] ?? 0)
@@ -224,19 +221,21 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
         )
 
         const dummyPair = new Pair(new TokenAmount(tokens[0], '0'), new TokenAmount(tokens[1], '0'))
-
         const stakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(userInfo?.result?.[0] ?? 0))
-        const totalStakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(lpTokenBalance.result?.[0]))
+        const totalStakedAmount = new TokenAmount(
+          dummyPair.liquidityToken,
+          JSBI.BigInt(lpTokenBalance.result?.[0] ?? 0)
+        )
         const stakedRatio = new Fraction(stakedAmount.raw, totalStakedAmount.raw)
 
         const totalLpTokenSupply = new TokenAmount(
           dummyPair.liquidityToken,
-          JSBI.BigInt(lpTokenTotalSupply.result?.[0])
+          JSBI.BigInt(lpTokenTotalSupply.result?.[0] ?? 0)
         )
         const totalPendingRewardAmount = new TokenAmount(govToken, calculatedTotalPendingRewards)
         const totalPendingLockedRewardAmount = new TokenAmount(govToken, calculatedLockedPendingRewards)
         const totalPendingUnlockedRewardAmount = new TokenAmount(govToken, calculatedUnlockedPendingRewards)
-        const startsAtBlock = startBlock.result?.[0]
+        const startsAtBlock = startBlock.result?.[0] ?? 0
 
         // poolInfo: lpToken address, allocPoint uint256, lastRewardBlock uint256, accGovTokenPerShare uint256
         const poolInfoResult = poolInfo.result
