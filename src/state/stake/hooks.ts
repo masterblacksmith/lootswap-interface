@@ -194,11 +194,6 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
           startBlock
         )
       ) {
-        if (poolInfo.error || userInfo.error || pendingReward.error) {
-          //console.error('Failed to load staking rewards info')
-          return memo
-        }
-
         const baseBlockRewards = new TokenAmount(govToken, JSBI.BigInt(baseRewardsPerBlock?.result?.[0] ?? 0))
 
         const poolBlockRewards = specificPoolRewardsPerBlock?.result?.[0]
