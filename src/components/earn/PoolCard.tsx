@@ -108,6 +108,8 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
     stakingInfo.valueOfTotalStakedAmountInPairCurrency &&
     USDPrice?.quote(stakingInfo.valueOfTotalStakedAmountInPairCurrency)
 
+  const enableAPR = !(token0.symbol === '1WISE' && token1.symbol === '1ETH')
+
   return (
     <Wrapper showBackground={isStaking} bgColor={backgroundColor}>
       <CardBGImage desaturate />
@@ -127,7 +129,7 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
       </TopSection>
 
       <StatContainer>
-        {token0.symbol !== '1WISE' && token1.symbol !== '1ETH' && (
+        {enableAPR && (
           <RowBetween>
             <TYPE.white> APR*</TYPE.white>
             <TYPE.white fontWeight={500}>
