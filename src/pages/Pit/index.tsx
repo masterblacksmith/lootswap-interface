@@ -210,7 +210,7 @@ export default function Pit({
             <AutoColumn gap="sm">
               <RowBetween>
                 <div>
-                  <TYPE.black>Your x{govToken?.symbol} Balance</TYPE.black>
+                  <TYPE.black>Your a{govToken?.symbol} Balance</TYPE.black>
                 </div>
               </RowBetween>
               <RowBetween style={{ alignItems: 'baseline' }}>
@@ -261,7 +261,7 @@ export default function Pit({
               </span>
               <b>Important:</b> Your {govToken?.symbol} rewards will only be visible
               <br />
-              after you withdraw your x{govToken?.symbol} tokens from the pool.
+              after you withdraw your a{govToken?.symbol} tokens from the pool.
               <br />
               <br />
               {pitSettings?.name} does not have any withdrawal fees.
