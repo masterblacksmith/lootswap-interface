@@ -1,12 +1,12 @@
 import { Interface } from '@ethersproject/abi'
 import { abi as STAKING_REWARDS_ABI } from '@uniswap/liquidity-staker/build/StakingRewards.json'
 import { abi as STAKING_REWARDS_FACTORY_ABI } from '@uniswap/liquidity-staker/build/StakingRewardsFactory.json'
-import { abi as MASTER_BREEDER_ABI } from '@venomswap/contracts/build/MasterBreeder.json'
+import { abi as MASTER_LOOTER_ABI } from '@lootswap/contracts/build/MasterLooter.json'
 
 const STAKING_REWARDS_INTERFACE = new Interface(STAKING_REWARDS_ABI)
 
-const MASTER_BREEDER_INTERFACE = new Interface(MASTER_BREEDER_ABI)
+const MASTER_LOOTER_INTERFACE = new Interface(MASTER_LOOTER_ABI)
 
 const STAKING_REWARDS_FACTORY_INTERFACE = new Interface(STAKING_REWARDS_FACTORY_ABI)
 
-export { STAKING_REWARDS_FACTORY_INTERFACE, STAKING_REWARDS_INTERFACE, MASTER_BREEDER_INTERFACE }
+export { STAKING_REWARDS_FACTORY_INTERFACE, STAKING_REWARDS_INTERFACE, MASTER_LOOTER_INTERFACE }

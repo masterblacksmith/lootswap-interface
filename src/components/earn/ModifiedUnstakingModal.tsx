@@ -7,7 +7,7 @@ import { TYPE, CloseIcon, ExternalLink } from '../../theme'
 import { ButtonError } from '../Button'
 import CurrencyInputPanel from '../CurrencyInputPanel'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
-import { TokenAmount, Pair, Blockchain } from '@venomswap/sdk'
+import { TokenAmount, Pair, Blockchain } from '@lootswap/sdk'
 import { useActiveWeb3React } from '../../hooks'
 import { StakingInfo, useDerivedUnstakeInfo } from '../../state/stake/hooks'
 //import { wrappedCurrencyAmount } from '../../utils/wrappedCurrency'
@@ -19,7 +19,7 @@ import usePlatformName from '../../hooks/usePlatformName'
 import { BlueCard } from '../Card'
 import { ColumnCenter } from '../Column'
 import { calculateGasMargin } from '../../utils'
-import { useMasterBreederContract } from '../../hooks/useContract'
+import { useMasterLooterContract } from '../../hooks/useContract'
 import useCalculateWithdrawalFee from '../../hooks/useCalculateWithdrawalFee'
 import useBlockchain from '../../hooks/useBlockchain'
 
@@ -87,7 +87,7 @@ export default function ModifiedStakingModal({ isOpen, onDismiss, stakingInfo }:
   }, [onDismiss])
 
   const platformName = usePlatformName()
-  const masterBreeder = useMasterBreederContract()
+  const masterLooter = useMasterLooterContract()
   const referral = ZERO_ADDRESS
 
   // pair contract for this token to be staked
@@ -101,13 +101,13 @@ export default function ModifiedStakingModal({ isOpen, onDismiss, stakingInfo }:
   }
 
   async function onWithdraw() {
-    if (masterBreeder && stakingInfo?.stakedAmount) {
+    if (masterLooter && stakingInfo?.stakedAmount) {
       setAttempting(true)
 
       const formattedAmount = `0x${parsedAmount?.raw.toString(16)}`
-      const estimatedGas = await masterBreeder.estimateGas.withdraw(stakingInfo.pid, formattedAmount, referral)
+      const estimatedGas = await masterLooter.estimateGas.withdraw(stakingInfo.pid, formattedAmount, referral)
 
-      await masterBreeder
+      await masterLooter
         .withdraw(stakingInfo.pid, formattedAmount, referral, {
           gasLimit: calculateGasMargin(estimatedGas)
         })
@@ -210,7 +210,7 @@ export default function ModifiedStakingModal({ isOpen, onDismiss, stakingInfo }:
         <LoadingView onDismiss={wrappedOnDismiss}>
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>Withdrawing Liquidity</TYPE.largeHeader>
-            <TYPE.body fontSize={20}>{parsedAmount?.toSignificant(4)} VENOM-LP</TYPE.body>
+            <TYPE.body fontSize={20}>{parsedAmount?.toSignificant(4)} LOOT-LP</TYPE.body>
           </AutoColumn>
         </LoadingView>
       )}
@@ -218,7 +218,7 @@ export default function ModifiedStakingModal({ isOpen, onDismiss, stakingInfo }:
         <SubmittedView onDismiss={wrappedOnDismiss} hash={hash}>
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>Transaction Submitted</TYPE.largeHeader>
-            <TYPE.body fontSize={20}>Withdraw {parsedAmount?.toSignificant(4)} VENOM-LP</TYPE.body>
+            <TYPE.body fontSize={20}>Withdraw {parsedAmount?.toSignificant(4)} LOOT-LP</TYPE.body>
           </AutoColumn>
         </SubmittedView>
       )}

@@ -1,4 +1,4 @@
-import { JSBI, Pair, Percent, TokenAmount } from '@venomswap/sdk'
+import { JSBI, Pair, Percent, TokenAmount } from '@lootswap/sdk'
 import { darken } from 'polished'
 import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
@@ -200,7 +200,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
           <AutoRow gap="8px">
             <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={20} />
             <Text fontWeight={500} fontSize={20}>
-              {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
+              {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}<>${currency1.symbol}`}
             </Text>
           </AutoRow>
           <RowFixed gap="8px">

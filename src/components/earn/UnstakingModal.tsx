@@ -6,7 +6,7 @@ import { RowBetween } from '../Row'
 import { TYPE, CloseIcon } from '../../theme'
 import { ButtonError } from '../Button'
 import { StakingInfo } from '../../state/stake/hooks'
-import { useMasterBreederContract } from '../../hooks/useContract'
+import { useMasterLooterContract } from '../../hooks/useContract'
 import { SubmittedView, LoadingView } from '../ModalViews'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
@@ -46,12 +46,12 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo }: Staki
     onDismiss()
   }
 
-  const masterBreeder = useMasterBreederContract()
+  const masterLooter = useMasterLooterContract()
 
   async function onWithdraw() {
-    if (masterBreeder && stakingInfo?.stakedAmount) {
+    if (masterLooter && stakingInfo?.stakedAmount) {
       setAttempting(true)
-      await masterBreeder
+      await masterLooter
         .withdraw(stakingInfo.pid, `0x${stakingInfo.stakedAmount.raw.toString(16)}`, referral)
         .then((response: TransactionResponse) => {
           addTransaction(response, {
@@ -112,7 +112,7 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo }: Staki
       {attempting && !hash && !failed && (
         <LoadingView onDismiss={wrappedOnDismiss}>
           <AutoColumn gap="12px" justify={'center'}>
-            <TYPE.body fontSize={20}>Withdrawing {stakingInfo?.stakedAmount?.toSignificant(4)} VENOM-LP</TYPE.body>
+            <TYPE.body fontSize={20}>Withdrawing {stakingInfo?.stakedAmount?.toSignificant(4)} LOOT-LP</TYPE.body>
             <TYPE.body fontSize={20}>
               Claiming {stakingInfo?.earnedAmount?.toSignificant(4)} {govToken?.symbol}
             </TYPE.body>
@@ -123,7 +123,7 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo }: Staki
         <SubmittedView onDismiss={wrappedOnDismiss} hash={hash}>
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>Transaction Submitted</TYPE.largeHeader>
-            <TYPE.body fontSize={20}>Withdrew VENOM-LP!</TYPE.body>
+            <TYPE.body fontSize={20}>Withdrew LOOT-LP!</TYPE.body>
             <TYPE.body fontSize={20}>Claimed {govToken?.symbol}!</TYPE.body>
           </AutoColumn>
         </SubmittedView>

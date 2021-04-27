@@ -1,10 +1,15 @@
 {
-  "name": "@venomswap/interface",
+  "name": "@lootswap/interface",
   "description": "Venomswap Interface",
   "homepage": ".",
   "private": true,
   "devDependencies": {
     "@ethersproject/experimental": "^5.1.2",
+    "@lootswap/contracts": "^2.0.2",
+    "@lootswap/core": "^2.0.1",
+    "@lootswap/periphery": "^2.0.1",
+    "@lootswap/sdk": "^2.0.1",
+    "@lootswap/sdk-extra": "^1.0.5",
     "@popperjs/core": "^2.4.4",
     "@reach/dialog": "^0.10.3",
     "@reach/portal": "^0.10.3",
@@ -31,11 +36,6 @@
     "@uniswap/liquidity-staker": "^1.0.2",
     "@uniswap/merkle-distributor": "1.0.1",
     "@uniswap/token-lists": "^1.0.0-beta.19",
-    "@venomswap/contracts": "^1.0.1",
-    "@venomswap/core": "^1.0.0",
-    "@venomswap/periphery": "^1.0.0",
-    "@venomswap/sdk": "^1.0.4",
-    "@venomswap/sdk-extra": "^1.0.3",
     "@web3-react/core": "^6.0.9",
     "@web3-react/fortmatic-connector": "^6.0.9",
     "@web3-react/injected-connector": "^6.0.7",
@@ -129,6 +129,6 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@venomswap/default-token-list": "^1.9.0"
+    "@lootswap/default-token-list": "^2.0.0"
   }
 }

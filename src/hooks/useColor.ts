@@ -2,7 +2,7 @@ import { useState, useLayoutEffect } from 'react'
 import { shade } from 'polished'
 import Vibrant from 'node-vibrant'
 import { hex } from 'wcag-contrast'
-import { Token, ChainId } from '@venomswap/sdk'
+import { Token, ChainId } from '@lootswap/sdk'
 import uriToHttp from 'utils/uriToHttp'
 
 async function getColorFromToken(token: Token): Promise<string | null> {
@@ -11,7 +11,7 @@ async function getColorFromToken(token: Token): Promise<string | null> {
   }
 
   const path = [56, 97, 1666600000, 1666700000].includes(token.chainId)
-    ? `https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/${token.symbol}.png`
+    ? `https://alpha.lootswap.finance/tokens/${token.symbol}.png`
     : `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${token.address}/logo.png`
 
   return Vibrant.from(path)

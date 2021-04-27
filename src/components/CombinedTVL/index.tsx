@@ -3,12 +3,12 @@ import { useStakingInfo } from '../../state/stake/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import useTotalCombinedTVL from '../../hooks/useTotalCombinedTVL'
 import { CustomMouseoverTooltip } from '../Tooltip/custom'
-import { PIT_SETTINGS } from '../../constants'
+import { DUNGEON_SETTINGS } from '../../constants'
 import filterStakingInfos from '../../utils/filterStakingInfos'
 
 export default function CombinedTVL({}) {
   const { chainId } = useActiveWeb3React()
-  const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
+  const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
   const filteredStakingInfos = filterStakingInfos(useStakingInfo())
   const TVLs = useTotalCombinedTVL(filteredStakingInfos)
 
@@ -27,9 +27,9 @@ export default function CombinedTVL({}) {
                   <br />
                 </>
               )}
-              {TVLs.totalPitTVL && (
+              {TVLs.totalDungeonTVL && (
                 <>
-                  <b>{pitSettings?.name}:</b> ${TVLs.totalPitTVL.toSignificant(8, { groupSeparator: ',' })}
+                  <b>{dungeonSettings?.name}:</b> ${TVLs.totalDungeonTVL.toSignificant(8, { groupSeparator: ',' })}
                   <br />
                 </>
               )}

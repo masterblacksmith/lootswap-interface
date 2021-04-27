@@ -1,17 +1,17 @@
 import { useMemo } from 'react'
 import { StakingInfo } from '../state/stake/hooks'
 import useTotalTVL from './useTotalTVL'
-import usePitTVL from './usePitTVL'
+import useDungeonTVL from './useDungeonTVL'
 
 export default function useTotalCombinedTVL(stakingInfos: StakingInfo[]): Record<string, any> {
   const totalStakingPoolTVL = useTotalTVL(stakingInfos)
-  const totalPitTVL = usePitTVL()
+  const totalDungeonTVL = useDungeonTVL()
 
   return useMemo(() => {
     return {
       stakingPoolTVL: totalStakingPoolTVL ? totalStakingPoolTVL : undefined,
-      totalPitTVL: totalPitTVL ? totalPitTVL : undefined,
-      totalCombinedTVL: totalStakingPoolTVL && totalPitTVL ? totalStakingPoolTVL.add(totalPitTVL) : undefined
+      totalDungeonTVL: totalDungeonTVL ? totalDungeonTVL : undefined,
+      totalCombinedTVL: totalStakingPoolTVL && totalDungeonTVL ? totalStakingPoolTVL.add(totalDungeonTVL) : undefined
     }
-  }, [stakingInfos, totalStakingPoolTVL, totalPitTVL])
+  }, [stakingInfos, totalStakingPoolTVL, totalDungeonTVL])
 }

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { TokenAmount } from '@venomswap/sdk'
+import { TokenAmount } from '@lootswap/sdk'
 import { AutoColumn } from '../../components/Column'
 import styled from 'styled-components'
 
@@ -10,9 +10,9 @@ import { TYPE } from '../../theme'
 import { RowBetween } from '../../components/Row'
 import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
 import { ButtonPrimary } from '../../components/Button'
-import StakingModal from '../../components/Pit/StakingModal'
-import ModifiedUnstakingModal from '../../components/Pit/ModifiedUnstakingModal'
-import ClaimModal from '../../components/Pit/ClaimModal'
+import StakingModal from '../../components/Dungeon/StakingModal'
+import ModifiedUnstakingModal from '../../components/Dungeon/ModifiedUnstakingModal'
+import ClaimModal from '../../components/Dungeon/ClaimModal'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import { CountUp } from 'use-count-up'
@@ -21,9 +21,9 @@ import { BlueCard } from '../../components/Card'
 
 import usePrevious from '../../hooks/usePrevious'
 
-import { PIT, PIT_SETTINGS } from '../../constants'
+import { DUNGEON, DUNGEON_SETTINGS } from '../../constants'
 import { GOVERNANCE_TOKEN_INTERFACE } from '../../constants/abis/governanceToken'
-import { PIT_INTERFACE } from '../../constants/abis/pit'
+import { DUNGEON_INTERFACE } from '../../constants/abis/dungeon'
 import useGovernanceToken from 'hooks/useGovernanceToken'
 import useTotalCombinedTVL from '../../hooks/useTotalCombinedTVL'
 import { useStakingInfo } from '../../state/stake/hooks'
@@ -107,7 +107,7 @@ flex-direction: column;
 `};
 `
 
-export default function Pit({
+export default function Dungeon({
   match: {
     params: { currencyIdA, currencyIdB }
   }
@@ -125,12 +125,17 @@ export default function Pit({
     GOVERNANCE_TOKEN_INTERFACE
   )
 
-  const pit = chainId ? PIT[chainId] : undefined
-  const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
-  const pitTVL = TVLs.totalPitTVL
-  const pitBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, pit, 'balanceOf', PIT_INTERFACE)
+  const dungeon = chainId ? DUNGEON[chainId] : undefined
+  const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
+  const dungeonTVL = TVLs.totalDungeonTVL
+  const dungeonBalance: TokenAmount | undefined = useTokenBalance(
+    account ?? undefined,
+    dungeon,
+    'balanceOf',
+    DUNGEON_INTERFACE
+  )
 
-  const userLiquidityStaked = pitBalance
+  const userLiquidityStaked = dungeonBalance
   const userLiquidityUnstaked = govTokenBalance
 
   // toggle for staking modal and unstaking modal
@@ -138,7 +143,7 @@ export default function Pit({
   const [showUnstakingModal, setShowUnstakingModal] = useState(false)
   const [showClaimModal, setShowClaimModal] = useState(false)
 
-  const countUpAmount = pitBalance?.toFixed(6) ?? '0'
+  const countUpAmount = dungeonBalance?.toFixed(6) ?? '0'
   const countUpAmountPrevious = usePrevious(countUpAmount) ?? '0'
 
   const toggleWalletModal = useWalletModalToggle()
@@ -175,7 +180,7 @@ export default function Pit({
         <AutoColumn gap="lg" style={{ width: '100%', maxWidth: '720px' }}>
           <NonCenteredDataRow style={{ alignItems: 'baseline' }}>
             <TYPE.mediumHeader></TYPE.mediumHeader>
-            {pitTVL && pitTVL.greaterThan('0') && (
+            {dungeonTVL && dungeonTVL.greaterThan('0') && (
               <TYPE.black>
                 <span role="img" aria-label="wizard-icon" style={{ marginRight: '0.5rem' }}>
                   🏆
@@ -193,7 +198,7 @@ export default function Pit({
               <CardNoise />
               <AutoColumn gap="md">
                 <RowBetween>
-                  <TYPE.white fontWeight={600}>{pitSettings?.name} - DEX fee sharing</TYPE.white>
+                  <TYPE.white fontWeight={600}>{dungeonSettings?.name} - DEX fee sharing</TYPE.white>
                 </RowBetween>
                 <RowBetween style={{ alignItems: 'baseline' }}>
                   <TYPE.white fontSize={14}>
@@ -233,7 +238,7 @@ export default function Pit({
         {account && (
           <TYPE.main>
             You have {govTokenBalance?.toFixed(2, { groupSeparator: ',' })} {govToken?.symbol} tokens available to
-            deposit to the {pitSettings?.name}
+            deposit to the {dungeonSettings?.name}
           </TYPE.main>
         )}
 
@@ -264,7 +269,7 @@ export default function Pit({
               after you withdraw your a{govToken?.symbol} tokens from the pool.
               <br />
               <br />
-              {pitSettings?.name} does not have any withdrawal fees.
+              {dungeonSettings?.name} does not have any withdrawal fees.
               <br />
               Tokens are also 100% unlocked when they are claimed.
             </TYPE.main>

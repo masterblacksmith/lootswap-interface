@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, JSBI, Token, Price, WETH } from '@venomswap/sdk'
+import { Currency, currencyEquals, JSBI, Token, Price, WETH } from '@lootswap/sdk'
 import { useMemo } from 'react'
 import { PairState, usePairs } from '../data/Reserves'
 import { useActiveWeb3React } from '.'

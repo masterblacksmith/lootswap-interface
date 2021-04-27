@@ -1,14 +1,15 @@
-import { ChainId, TokenAmount, Blockchain } from '@venomswap/sdk'
+import { ChainId, TokenAmount, Blockchain } from '@lootswap/sdk'
 import React, { useState } from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
 import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
+import { isMobile } from 'react-device-detect'
 
 import styled from 'styled-components'
 
-import LootSwapLogo from '../../assets/svg/lootswap/black.svg'
-import LootSwapLogoDark from '../../assets/svg/lootswap/white.svg'
+import LootSwapLogo from '../../assets/images/loot_logo.png'
+import LootSwapLogoDark from '../../assets/images/loot_logo.png'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances, useAggregateGovTokenBalance } from '../../state/wallet/hooks'
@@ -31,7 +32,7 @@ import Modal from '../Modal'
 import GovTokenBalanceContent from './GovTokenBalanceContent'
 import usePrevious from '../../hooks/usePrevious'
 import { BASE_CURRENCY, BLOCKCHAIN } from '../../connectors'
-import { PIT_SETTINGS } from '../../constants'
+import { DUNGEON_SETTINGS } from '../../constants'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
 
 const HeaderFrame = styled.div`
@@ -219,7 +220,7 @@ const StyledNavLink = styled(NavLink).attrs({
   color: ${({ theme }) => theme.text2};
   font-size: 1rem;
   width: fit-content;
-  margin: 0 12px;
+  margin: ${isMobile ? '0 5px' : '0 12px'};
   font-weight: 500;
 
   &.${activeClassName} {
@@ -306,7 +307,7 @@ export default function Header() {
   const { t } = useTranslation()
 
   const govToken = useGovernanceToken()
-  const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
+  const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
 
   let logoDark: string
   let logo: string
@@ -343,6 +344,7 @@ export default function Header() {
 
   const countUpValue = aggregateBalance?.toFixed(0) ?? '0'
   const countUpValuePrevious = usePrevious(countUpValue) ?? '0'
+  const showEarn = true
 
   return (
     <HeaderFrame>
@@ -353,7 +355,7 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img width={'48px'} src={darkMode ? logoDark : logo} alt="logo" />
+            <img width={isMobile ? '125px' : '256px'} src={darkMode ? logoDark : logo} alt="logo" />
           </UniIcon>
         </Title>
         <HeaderLinks>
@@ -373,12 +375,16 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
-          <StyledNavLink id={`stake-nav-link`} to={'/staking'}>
-            Staking
-          </StyledNavLink>
-          <StyledNavLink id={`stake-nav-link`} to={`${pitSettings?.path}`}>
-            {pitSettings?.name}
-          </StyledNavLink>
+          {showEarn && (
+            <StyledNavLink id={`stake-nav-link`} to={'/staking'}>
+              Staking
+            </StyledNavLink>
+          )}
+          {showEarn && (
+            <StyledNavLink id={`stake-nav-link`} to={`${dungeonSettings?.path}`}>
+              {dungeonSettings?.name}
+            </StyledNavLink>
+          )}
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>

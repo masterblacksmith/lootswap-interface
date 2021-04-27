@@ -1,4 +1,3 @@
-import { transparentize } from 'polished'
 import React, { useMemo } from 'react'
 import styled, {
   ThemeProvider as StyledComponentsThemeProvider,
@@ -11,7 +10,8 @@ import { Text, TextProps } from 'rebass'
 import { Colors } from './styled'
 
 import useBlockchain from '../hooks/useBlockchain'
-import { Blockchain } from '@venomswap/sdk'
+import { Blockchain } from '@lootswap/sdk'
+import bgimage from '../assets/images/loot_background.png'
 
 export * from './components'
 
@@ -90,10 +90,10 @@ export function defaultColors(darkMode: boolean): Colors {
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
 
     // Added:
-    tokenButtonGradientStart: '#008c6b',
-    tokenButtonGradientEnd: '#005224',
-    customCardGradientStart: '#008c6b',
-    customCardGradientEnd: '#00c09c'
+    tokenButtonGradientStart: '#909ae2',
+    tokenButtonGradientEnd: '#1f3bc3',
+    customCardGradientStart: '#909ae2',
+    customCardGradientEnd: '#1f3bc3'
   }
 }
 
@@ -150,10 +150,10 @@ export function lootSwapColors(darkMode: boolean): Colors {
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
 
     // Added:
-    tokenButtonGradientStart: '#008c6b',
-    tokenButtonGradientEnd: '#005224',
-    customCardGradientStart: '#008c6b',
-    customCardGradientEnd: '#00c09c'
+    tokenButtonGradientStart: '#909ae2',
+    tokenButtonGradientEnd: '#1f3bc3',
+    customCardGradientStart: '#909ae2',
+    customCardGradientEnd: '#1f3bc3'
   }
 }
 
@@ -210,10 +210,10 @@ export function bscColors(darkMode: boolean): Colors {
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
 
     // Added:
-    tokenButtonGradientStart: '#ffbb00',
-    tokenButtonGradientEnd: '#c99212',
-    customCardGradientStart: '#001d4c',
-    customCardGradientEnd: '#000024'
+    tokenButtonGradientStart: '#909ae2',
+    tokenButtonGradientEnd: '#1f3bc3',
+    customCardGradientStart: '#909ae2',
+    customCardGradientEnd: '#1f3bc3'
   }
 }
 
@@ -270,10 +270,10 @@ export function harmonyColors(darkMode: boolean): Colors {
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
 
     // Added:
-    tokenButtonGradientStart: '#008c6b',
-    tokenButtonGradientEnd: '#005224',
-    customCardGradientStart: '#008c6b',
-    customCardGradientEnd: '#00c09c'
+    tokenButtonGradientStart: '#909ae2',
+    tokenButtonGradientEnd: '#1f3bc3',
+    customCardGradientStart: '#909ae2',
+    customCardGradientEnd: '#1f3bc3'
   }
 }
 
@@ -425,12 +425,17 @@ html {
 
 body {
   min-height: 100vh;
-  background-position: 0 -30vh;
-  background-repeat: no-repeat;
-  background-image: ${({ theme }) =>
-    `radial-gradient(50% 50% at 50% 50%, ${transparentize(0.9, theme.primary1)} 0%, ${transparentize(
-      1,
-      theme.bg1
-    )} 100%)`};
+}
+body::after {
+  content: "";
+  background-size: cover;
+  background-image: url(${bgimage});
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 `

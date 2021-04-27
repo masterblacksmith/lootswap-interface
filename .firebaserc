@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "dev": "lootswap-9652c",
+    "production": "lootswap-official"
+  }
+}

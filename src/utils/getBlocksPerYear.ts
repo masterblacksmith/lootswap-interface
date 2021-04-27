@@ -1,5 +1,5 @@
-import { ChainId, JSBI } from '@venomswap/sdk'
-import { BLOCKCHAIN_SETTINGS } from '@venomswap/sdk-extra'
+import { ChainId, JSBI } from '@lootswap/sdk'
+import { BLOCKCHAIN_SETTINGS } from '@lootswap/sdk-extra'
 
 export default function getBlocksPerYear(chainId: ChainId | undefined): JSBI {
   const blockchainSettings = chainId ? BLOCKCHAIN_SETTINGS[chainId] : undefined
