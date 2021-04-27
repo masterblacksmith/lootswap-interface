@@ -84,8 +84,6 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
   const token0 = stakingInfo.tokens[0]
   const token1 = stakingInfo.tokens[1]
 
-  console.log('stakingInfo.tokens', stakingInfo.tokens)
-
   const currency0 = unwrappedToken(token0)
   const currency1 = unwrappedToken(token1)
 
