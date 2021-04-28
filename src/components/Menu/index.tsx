@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Code, MessageCircle } from 'react-feather'
+import { Send, Code, MessageCircle } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useActiveWeb3React } from '../../hooks'
@@ -116,7 +116,7 @@ export default function Menu() {
             Discord
           </MenuItem>
           <MenuItem id="link" href="https://t.me/VenomDAO">
-            <MessageCircle size={14} />
+            <Send size={14} />
             Telegram
           </MenuItem>
           <MenuItem id="link" href={CODE_LINK}>
