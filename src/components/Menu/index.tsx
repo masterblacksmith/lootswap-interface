@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Send, Code, MessageCircle } from 'react-feather'
+import { Send, Code, MessageSquare } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useActiveWeb3React } from '../../hooks'
@@ -112,7 +112,7 @@ export default function Menu() {
       {open && (
         <MenuFlyout>
           <MenuItem id="link" href="https://bit.ly/VenomDAODiscord">
-            <MessageCircle size={14} />
+            <MessageSquare size={14} />
             Discord
           </MenuItem>
           <MenuItem id="link" href="https://t.me/VenomDAO">
