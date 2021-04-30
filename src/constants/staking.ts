@@ -83,6 +83,10 @@ export const STAKING_REWARDS_INFO: {
     {
       pid: 18,
       tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, '1WISE/1ETH')
+    },
+    {
+      pid: 19,
+      tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'WONE/1WBTC')
     }
   ],
   [ChainId.HARMONY_TESTNET]: [
