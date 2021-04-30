@@ -1,14 +1,4 @@
-import {
-  WETH,
-  CurrencyAmount,
-  JSBI,
-  Token,
-  TokenAmount,
-  Price,
-  Pair,
-  Fraction,
-  DEFAULT_CURRENCIES
-} from '@venomswap/sdk'
+import { WETH, CurrencyAmount, JSBI, Token, TokenAmount, Pair, Fraction, DEFAULT_CURRENCIES } from '@venomswap/sdk'
 import { useMemo } from 'react'
 import { STAKING_REWARDS_INFO } from '../../constants/staking'
 import { useActiveWeb3React } from '../../hooks'
@@ -21,18 +11,14 @@ import { useMultipleContractSingleData } from '../../state/multicall/hooks'
 import { abi as IUniswapV2PairABI } from '@venomswap/core/build/IUniswapV2Pair.json'
 import { Interface } from '@ethersproject/abi'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
-import useGovernanceTokenWethPrice from '../../hooks/useGovernanceTokenWethPrice'
-import useBUSDPrice from '../../hooks/useBUSDPrice'
+import useTokenWETHPrice from '../../hooks/useTokenWETHPrice'
 import { unwrappedToken, wrappedCurrency } from '../../utils/wrappedCurrency'
 import getBlocksPerYear from '../../utils/getBlocksPerYear'
 import calculateTotalStakedAmount from '../../utils/calculateTotalStakedAmount'
 import getPair from '../../utils/getPair'
-import calculateApr from '../../utils/calculateApr'
+import calculateAPR from '../../utils/calculateAPR'
 import getToken from '../../utils/getToken'
 import validStakingInfo from '../../utils/validStakingInfo'
-
-//import { useTotalSupply } from '../../data/TotalSupply'
-//import { useBlockNumber } from '../application/hooks'
 
 const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
 
@@ -104,11 +90,16 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
 
   const weth = chainId && WETH[chainId]
   const govToken = useGovernanceToken()
-  const govTokenWethPrice = useGovernanceTokenWethPrice()
-  const govTokenBusdPrice = useBUSDPrice(govToken)
+  const govTokenWETHPrice = useTokenWETHPrice(govToken)
+
+  const BUSD: Token | undefined = getToken(chainId, 'BUSD')
+  const BUSDWETHPrice = useTokenWETHPrice(BUSD)
 
   const bscBUSD: Token | undefined = getToken(chainId, 'bscBUSD')
-  const bscBUSDPrice = useBUSDPrice(bscBUSD)
+  const bscBUSDWETHPrice = useTokenWETHPrice(bscBUSD)
+
+  const bridgedETH: Token | undefined = getToken(chainId, '1ETH')
+  const bridgedETHWETHPrice = useTokenWETHPrice(bridgedETH)
 
   const blocksPerYear = getBlocksPerYear(chainId)
 
@@ -256,6 +247,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
         )
 
         let valueOfTotalStakedAmountInPairCurrency: TokenAmount | undefined
+        let valueOfTotalStakedAmountInPairCurrencyForAPR: TokenAmount | Fraction | undefined
         let apr: Fraction | undefined
 
         if (totalLpTokenSupply && stakingTokenPair) {
@@ -266,28 +258,43 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
             totalLpTokenSupply
           )
 
-          let tokenPrice: Price | undefined
+          valueOfTotalStakedAmountInPairCurrencyForAPR = valueOfTotalStakedAmountInPairCurrency
+
           switch (baseToken.symbol?.toUpperCase()) {
             case weth.symbol?.toUpperCase():
-              tokenPrice = govTokenWethPrice
+              valueOfTotalStakedAmountInPairCurrencyForAPR = valueOfTotalStakedAmountInPairCurrency
               break
             case govToken.symbol?.toUpperCase():
-              tokenPrice = govTokenBusdPrice
+              valueOfTotalStakedAmountInPairCurrencyForAPR = govTokenWETHPrice
+                ? valueOfTotalStakedAmountInPairCurrency.multiply(govTokenWETHPrice)
+                : valueOfTotalStakedAmountInPairCurrency
+              break
+            case BUSD?.symbol?.toUpperCase():
+              valueOfTotalStakedAmountInPairCurrencyForAPR = BUSDWETHPrice
+                ? valueOfTotalStakedAmountInPairCurrency.multiply(BUSDWETHPrice)
+                : valueOfTotalStakedAmountInPairCurrency
               break
             case bscBUSD?.symbol?.toUpperCase():
-              tokenPrice = bscBUSDPrice
+              valueOfTotalStakedAmountInPairCurrencyForAPR = bscBUSDWETHPrice
+                ? valueOfTotalStakedAmountInPairCurrency.multiply(bscBUSDWETHPrice)
+                : valueOfTotalStakedAmountInPairCurrency
+              break
+            case bridgedETH?.symbol?.toUpperCase():
+              valueOfTotalStakedAmountInPairCurrencyForAPR = bridgedETHWETHPrice
+                ? valueOfTotalStakedAmountInPairCurrency.multiply(bridgedETHWETHPrice)
+                : valueOfTotalStakedAmountInPairCurrency
               break
             default:
-              tokenPrice = govTokenWethPrice
+              valueOfTotalStakedAmountInPairCurrencyForAPR = valueOfTotalStakedAmountInPairCurrency
               break
           }
 
-          apr = calculateApr(
-            tokenPrice,
+          apr = calculateAPR(
+            govTokenWETHPrice,
             baseBlockRewards,
             blocksPerYear,
             poolShare,
-            valueOfTotalStakedAmountInPairCurrency
+            valueOfTotalStakedAmountInPairCurrencyForAPR
           )
         }
 
@@ -323,10 +330,11 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
     govToken,
     weth,
     masterInfo,
-    govTokenWethPrice,
-    govTokenBusdPrice,
+    govTokenWETHPrice,
+    BUSD,
+    BUSDWETHPrice,
     bscBUSD,
-    bscBUSDPrice,
+    bscBUSDWETHPrice,
     pids,
     poolInfos,
     userInfos,
