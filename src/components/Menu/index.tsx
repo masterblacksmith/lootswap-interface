@@ -111,7 +111,7 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://bit.ly/VenomDAODiscord">
+          <MenuItem id="link" href="https://discord.viper.exchange">
             <MessageSquare size={14} />
             Discord
           </MenuItem>
