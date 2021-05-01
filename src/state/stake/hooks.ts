@@ -9,10 +9,10 @@ import { useMultipleContractSingleData } from '../../state/multicall/hooks'
 import { abi as IUniswapV2PairABI } from '@venomswap/core/build/IUniswapV2Pair.json'
 import { Interface } from '@ethersproject/abi'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
-import useTokensWithWETHPrices from '../../hooks/useTokensWithWETHPrices'
+import useTokensWithWethPrices from '../../hooks/useTokensWithWethPrices'
 import getBlocksPerYear from '../../utils/getBlocksPerYear'
-import calculateWETHAdjustedTotalStakedAmount from '../../utils/calculateWETHAdjustedTotalStakedAmount'
-import calculateAPR from '../../utils/calculateAPR'
+import calculateWethAdjustedTotalStakedAmount from '../../utils/calculateWethAdjustedTotalStakedAmount'
+import calculateApr from '../../utils/calculateApr'
 import validStakingInfo from '../../utils/validStakingInfo'
 
 const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
@@ -83,7 +83,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
     [chainId, pairToFilterBy]
   )
 
-  const tokensWithPrices = useTokensWithWETHPrices()
+  const tokensWithPrices = useTokensWithWethPrices()
 
   const weth = tokensWithPrices?.WETH?.token
   const govToken = tokensWithPrices?.govToken?.token
@@ -216,7 +216,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
         const allocPoint = JSBI.BigInt(poolInfoResult && poolInfoResult[1])
         const active = poolInfoResult && JSBI.GT(JSBI.BigInt(allocPoint), 0) ? true : false
 
-        const adjusted = calculateWETHAdjustedTotalStakedAmount(
+        const adjusted = calculateWethAdjustedTotalStakedAmount(
           chainId,
           tokensWithPrices,
           tokens,
@@ -229,7 +229,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
         const totalStakedAmountWETH: TokenAmount | Fraction | undefined = adjusted?.totalStakedAmountWETH
 
         const apr = totalStakedAmountWETH
-          ? calculateAPR(govTokenWETHPrice, baseBlockRewards, blocksPerYear, poolShare, totalStakedAmountWETH)
+          ? calculateApr(govTokenWETHPrice, baseBlockRewards, blocksPerYear, poolShare, totalStakedAmountWETH)
           : undefined
 
         const stakingInfo = {

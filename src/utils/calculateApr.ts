@@ -1,7 +1,7 @@
 import { Price, Fraction, TokenAmount, JSBI } from '@venomswap/sdk'
 import { utils } from 'ethers'
 
-export default function calculateAPR(
+export default function calculateApr(
   govTokenWethPrice: Price | undefined,
   baseBlockRewards: TokenAmount,
   blocksPerYear: JSBI,
