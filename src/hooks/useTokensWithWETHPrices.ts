@@ -29,9 +29,21 @@ export default function useTokensWithWETHPrices(): Record<string, any> {
     return {
       WETH: { token: weth, price: undefined },
       govToken: { token: govToken, price: govTokenWETHPrice },
-      BUSD: { token: govToken, price: BUSDWETHPrice },
+      BUSD: { token: BUSD, price: BUSDWETHPrice },
       bscBUSD: { token: bscBUSD, price: bscBUSDWETHPrice },
       bridgedETH: { token: bridgedETH, price: bridgedETHWETHPrice }
     }
-  }, [chainId, blockchain])
+  }, [
+    chainId,
+    blockchain,
+    weth,
+    govToken,
+    govTokenWETHPrice,
+    BUSD,
+    BUSDWETHPrice,
+    bscBUSD,
+    bscBUSDWETHPrice,
+    bridgedETH,
+    bridgedETHWETHPrice
+  ])
 }
