@@ -3196,10 +3196,10 @@
   resolved "https://registry.yarnpkg.com/@venomswap/core/-/core-1.0.0.tgz#f1336702e8ecce6b79b06212220da43a34b3749c"
   integrity sha512-cd4+e5KKH7QmSjMhe50lty35eHuZVTh9YYnkWPdQPe6KG3R5P5JE3LFliwNLpuV4jWEYYRlEa3OaG3ie+BlYrg==
 
-"@venomswap/default-token-list@^1.8.5":
-  version "1.8.5"
-  resolved "https://registry.yarnpkg.com/@venomswap/default-token-list/-/default-token-list-1.8.5.tgz#ff373ffa274062dd4467a3b0312dad3d01d3ae94"
-  integrity sha512-SBB9u1MrZkhC+mNAjGuPMA/nySovIFpob+i+BVpG02cnGuGzSIyDUa4hqn5o1XwxQYxJUmV2/Jjk0whsTC+aMQ==
+"@venomswap/default-token-list@^1.8.5", "@venomswap/default-token-list@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@venomswap/default-token-list/-/default-token-list-1.9.0.tgz#c201c1f5794966463de1322559b18aa21bcf9bb1"
+  integrity sha512-YrVRKUEavME9HA+qUAOyWL3O33HReVGBtNrRmxucgLFrWsgB0jb5/EFSTrOWtjt6MDNcVa7AfjbEcUax+gjfig==
 
 "@venomswap/lib@1.0.0", "@venomswap/lib@^1.0.0":
   version "1.0.0"
@@ -5366,9 +5366,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001219:
-  version "1.0.30001219"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001219.tgz#5bfa5d0519f41f993618bd318f606a4c4c16156b"
-  integrity sha512-c0yixVG4v9KBc/tQ2rlbB3A/bgBFRvl8h8M4IeUbqCca4gsiCfvtaheUssbnux/Mb66Vjz7x8yYjDgYcNQOhyQ==
+  version "1.0.30001220"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001220.tgz#c080e1c8eefb99f6cc9685da6313840bdbaf4c36"
+  integrity sha512-pjC2T4DIDyGAKTL4dMvGUQaMUHRmhvPpAgNNTa14jaBWHu+bLQgvpFqElxh9L4829Fdx0PlKiMp3wnYldRtECA==
 
 capture-exit@^2.0.0:
   version "2.0.0"
