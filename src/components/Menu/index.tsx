@@ -115,7 +115,7 @@ export default function Menu() {
             <PieChart size={14} />
             Analytics
           </MenuItem>
-          <MenuItem id="link" href="https://bit.ly/VenomDAODiscord">
+          <MenuItem id="link" href="https://discord.viper.exchange">
             <MessageSquare size={14} />
             Discord
           </MenuItem>
