@@ -127,7 +127,6 @@ export default function Dungeon({
 
   const dungeon = chainId ? DUNGEON[chainId] : undefined
   const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
-  const dungeonTVL = TVLs.totalDungeonTVL
   const dungeonBalance: TokenAmount | undefined = useTokenBalance(
     account ?? undefined,
     dungeon,
@@ -180,7 +179,7 @@ export default function Dungeon({
         <AutoColumn gap="lg" style={{ width: '100%', maxWidth: '720px' }}>
           <NonCenteredDataRow style={{ alignItems: 'baseline' }}>
             <TYPE.mediumHeader></TYPE.mediumHeader>
-            {dungeonTVL && dungeonTVL.greaterThan('0') && (
+            {TVLs?.stakingPoolTVL?.greaterThan('0') && (
               <TYPE.black>
                 <span role="img" aria-label="wizard-icon" style={{ marginRight: '0.5rem' }}>
                   🏆
