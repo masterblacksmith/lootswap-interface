@@ -192,7 +192,11 @@ export const SUGGESTED_BASES: ChainTokenList = {
   [ChainId.HARMONY_MAINNET]: [
     ...WETH_ONLY[ChainId.HARMONY_MAINNET],
     getTokenWithDefault(ChainId.HARMONY_MAINNET, 'BUSD'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'LOOT')
+    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'bscBUSD'),
+    getTokenWithDefault(ChainId.HARMONY_MAINNET, '1USDC'),
+    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'LOOT'),
+    getTokenWithDefault(ChainId.HARMONY_MAINNET, '1ETH'),
+    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'LINK')
   ]
 }
 
