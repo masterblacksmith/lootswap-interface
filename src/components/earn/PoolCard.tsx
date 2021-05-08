@@ -91,7 +91,7 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
   const token1 = stakingInfo.tokens[1]
   const currency0 = unwrappedToken(token0)
   const currency1 = unwrappedToken(token1)
-  const backgroundColor = useColor(stakingInfo.baseToken)
+  const backgroundColor = useColor(stakingInfo?.baseToken)
 
   return (
     <Wrapper showBackground={isStaking} bgColor={backgroundColor}>
