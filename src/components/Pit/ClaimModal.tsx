@@ -97,7 +97,7 @@ export default function ClaimModal({ isOpen, onDismiss }: ClaimModalProps) {
     for (let index = 0; stakingPools && index < stakingPools.length; index++) {
       const stakingPool = stakingPools[index]
       const result = results[index]
-      if (result && !result.loading) {
+      if (result && !result.loading && result.result) {
         if (JSBI.GT(JSBI.BigInt(result?.result?.[0]), minimumAmountWei)) {
           claimFrom.push(stakingPool.tokens[0].address)
           claimTo.push(stakingPool.tokens[1].address)

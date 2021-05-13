@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next'
 
 import styled from 'styled-components'
 
-import LootSwapLogo from '../../assets/svg/lootswap/black.svg'
-import LootSwapLogoDark from '../../assets/svg/lootswap/white.svg'
+import LootSwapLogo from '../../assets/images/lootswap.png'
+import LootSwapLogoDark from '../../assets/images/lootswap.png'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances, useAggregateGovTokenBalance } from '../../state/wallet/hooks'
@@ -353,7 +353,7 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img width={'48px'} src={darkMode ? logoDark : logo} alt="logo" />
+            <img width={'256px'} src={darkMode ? logoDark : logo} alt="logo" />
           </UniIcon>
         </Title>
         <HeaderLinks>
