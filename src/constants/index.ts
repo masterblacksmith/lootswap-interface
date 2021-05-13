@@ -18,12 +18,12 @@ export const ROUTER_ADDRESSES: { [chainId in ChainId]: string } = {
   [ChainId.BSC_MAINNET]: ZERO_ONE_ADDRESS,
   [ChainId.BSC_TESTNET]: ZERO_ONE_ADDRESS,
   [ChainId.HARMONY_MAINNET]: ZERO_ONE_ADDRESS, //TODO
-  [ChainId.HARMONY_TESTNET]: ZERO_ONE_ADDRESS //FIXME
+  [ChainId.HARMONY_TESTNET]: '0xCbD7e637Ef13D05ddC4FE08E4267b14AC7B337f4'
 }
 
-export const GOVERNANCE_ADDRESS = '0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F' // FIXME
+export const GOVERNANCE_ADDRESS = '0x5F422D2FeE1C33dc0484066fA890EcF345dc985E'
 
-export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC' // FIXME
+export const TIMELOCK_ADDRESS = '0xf6a5dc9030cC4e7c146bc9701E5815916167A72c'
 
 export const GOVERNANCE_TOKEN: { [chainId in ChainId]: Token } = {
   [ChainId.MAINNET]: new Token(ChainId.MAINNET, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Loot'),
@@ -48,7 +48,7 @@ export const GOVERNANCE_TOKEN: { [chainId in ChainId]: Token } = {
   ),
   [ChainId.HARMONY_TESTNET]: new Token(
     ChainId.HARMONY_TESTNET,
-    ZERO_ONE_ADDRESS, // FIXME
+    '0x9cC2BE4D80e22a1533b86DdA8E5F81e70264877B',
     18,
     'LOOT',
     'Loot'
@@ -64,7 +64,7 @@ export const MASTER_BREEDER: { [chainId in ChainId]: string } = {
   [ChainId.BSC_MAINNET]: ZERO_ONE_ADDRESS,
   [ChainId.BSC_TESTNET]: ZERO_ONE_ADDRESS, // TODO
   [ChainId.HARMONY_MAINNET]: ZERO_ONE_ADDRESS, // TODO
-  [ChainId.HARMONY_TESTNET]: ZERO_ONE_ADDRESS // FIXME
+  [ChainId.HARMONY_TESTNET]: '0x881fDd77Cd085A9f99AAd3Ae31E0601E4bf769D9' // FIXME
 }
 
 export const PIT_BREEDER: { [chainId in ChainId]: string } = {
@@ -76,7 +76,7 @@ export const PIT_BREEDER: { [chainId in ChainId]: string } = {
   [ChainId.BSC_MAINNET]: ZERO_ONE_ADDRESS,
   [ChainId.BSC_TESTNET]: ZERO_ONE_ADDRESS, // TODO
   [ChainId.HARMONY_MAINNET]: ZERO_ONE_ADDRESS, // TODO
-  [ChainId.HARMONY_TESTNET]: ZERO_ONE_ADDRESS // FIXME
+  [ChainId.HARMONY_TESTNET]: '0xCd1b5612f7cf6c9F5c7D1d8E9F920e191AA13E7A'
 }
 
 export const PIT: { [chainId in ChainId]: Token } = {
@@ -102,7 +102,7 @@ export const PIT: { [chainId in ChainId]: Token } = {
   ),
   [ChainId.HARMONY_TESTNET]: new Token(
     ChainId.HARMONY_TESTNET,
-    ZERO_ONE_ADDRESS, //FIXME
+    '0x84E018755B4268a3ef9E06010C81d9163417c4A8',
     18,
     'aLOOT',
     'AutoLoot'

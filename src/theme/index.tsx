@@ -90,10 +90,10 @@ export function defaultColors(darkMode: boolean): Colors {
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
 
     // Added:
-    tokenButtonGradientStart: '#008c6b',
-    tokenButtonGradientEnd: '#005224',
-    customCardGradientStart: '#008c6b',
-    customCardGradientEnd: '#00c09c'
+    tokenButtonGradientStart: '#909ae2',
+    tokenButtonGradientEnd: '#1f3bc3',
+    customCardGradientStart: '#909ae2',
+    customCardGradientEnd: '#1f3bc3'
   }
 }
 
@@ -150,10 +150,10 @@ export function lootSwapColors(darkMode: boolean): Colors {
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
 
     // Added:
-    tokenButtonGradientStart: '#008c6b',
-    tokenButtonGradientEnd: '#005224',
-    customCardGradientStart: '#008c6b',
-    customCardGradientEnd: '#00c09c'
+    tokenButtonGradientStart: '#909ae2',
+    tokenButtonGradientEnd: '#1f3bc3',
+    customCardGradientStart: '#909ae2',
+    customCardGradientEnd: '#1f3bc3'
   }
 }
 
@@ -210,10 +210,10 @@ export function bscColors(darkMode: boolean): Colors {
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
 
     // Added:
-    tokenButtonGradientStart: '#ffbb00',
-    tokenButtonGradientEnd: '#c99212',
-    customCardGradientStart: '#001d4c',
-    customCardGradientEnd: '#000024'
+    tokenButtonGradientStart: '#909ae2',
+    tokenButtonGradientEnd: '#1f3bc3',
+    customCardGradientStart: '#909ae2',
+    customCardGradientEnd: '#1f3bc3'
   }
 }
 
@@ -270,10 +270,10 @@ export function harmonyColors(darkMode: boolean): Colors {
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
 
     // Added:
-    tokenButtonGradientStart: '#008c6b',
-    tokenButtonGradientEnd: '#005224',
-    customCardGradientStart: '#008c6b',
-    customCardGradientEnd: '#00c09c'
+    tokenButtonGradientStart: '#909ae2',
+    tokenButtonGradientEnd: '#1f3bc3',
+    customCardGradientStart: '#909ae2',
+    customCardGradientEnd: '#1f3bc3'
   }
 }
 
