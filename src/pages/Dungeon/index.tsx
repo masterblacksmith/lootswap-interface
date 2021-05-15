@@ -135,6 +135,9 @@ export default function Dungeon({
     DUNGEON_INTERFACE
   )
   const govTokenDungeonTokenRatio = useDungeonRatio()
+  const adjustedDungeonBalance = govTokenDungeonTokenRatio
+    ? dungeonBalance?.multiply(govTokenDungeonTokenRatio)
+    : undefined
 
   const userLiquidityStaked = dungeonBalance
   const userLiquidityUnstaked = govTokenBalance
@@ -243,10 +246,17 @@ export default function Dungeon({
           </StyledBottomCard>
         </BottomSection>
 
-        {account && (
+        {account && adjustedDungeonBalance && adjustedDungeonBalance?.greaterThan('0') && (
+          <TYPE.main>
+            You have {adjustedDungeonBalance?.toFixed(2, { groupSeparator: ',' })} {govToken?.symbol} tokens staked in
+            the&nbsp;{dungeonSettings?.name}.
+          </TYPE.main>
+        )}
+
+        {account && (!adjustedDungeonBalance || adjustedDungeonBalance?.equalTo('0')) && (
           <TYPE.main>
             You have {govTokenBalance?.toFixed(2, { groupSeparator: ',' })} {govToken?.symbol} tokens available to
-            deposit to the {dungeonSettings?.name}
+            deposit to the {dungeonSettings?.name}.
           </TYPE.main>
         )}
 
