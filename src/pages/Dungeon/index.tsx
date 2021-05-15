@@ -26,6 +26,7 @@ import { GOVERNANCE_TOKEN_INTERFACE } from '../../constants/abis/governanceToken
 import { DUNGEON_INTERFACE } from '../../constants/abis/dungeon'
 import useGovernanceToken from 'hooks/useGovernanceToken'
 import useTotalCombinedTVL from '../../hooks/useTotalCombinedTVL'
+import useDungeonRatio from '../../hooks/useDungeonRatio'
 import { useStakingInfo } from '../../state/stake/hooks'
 import filterStakingInfos from '../../utils/filterStakingInfos'
 import CombinedTVL from '../../components/CombinedTVL'
@@ -133,6 +134,7 @@ export default function Dungeon({
     'balanceOf',
     DUNGEON_INTERFACE
   )
+  const govTokenDungeonTokenRatio = useDungeonRatio()
 
   const userLiquidityStaked = dungeonBalance
   const userLiquidityUnstaked = govTokenBalance
@@ -214,7 +216,14 @@ export default function Dungeon({
             <AutoColumn gap="sm">
               <RowBetween>
                 <div>
-                  <TYPE.black>Your a{govToken?.symbol} Balance</TYPE.black>
+                  <TYPE.black>
+                    Your a{govToken?.symbol} Balance
+                    {govTokenDungeonTokenRatio && (
+                      <TYPE.italic display="inline" marginLeft="0.25em">
+                        (1 a{govToken?.symbol} = {govTokenDungeonTokenRatio.toSignificant(4)} {govToken?.symbol})
+                      </TYPE.italic>
+                    )}
+                  </TYPE.black>
                 </div>
               </RowBetween>
               <RowBetween style={{ alignItems: 'baseline' }}>
