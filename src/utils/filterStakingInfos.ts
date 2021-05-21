@@ -1,8 +1,8 @@
 import { StakingInfo } from '../state/stake/hooks'
 
-export default function filterStakingInfos(stakingInfos: StakingInfo[], activeState: boolean): StakingInfo[] {
+export default function filterStakingInfos(stakingInfos: StakingInfo[], isActive: boolean): StakingInfo[] {
   return stakingInfos
-    .filter(s => s.active === activeState)
+    .filter(s => s.active === isActive)
     .sort((a, b) => {
       if (a.apr === undefined || b.apr === undefined) {
         return 0

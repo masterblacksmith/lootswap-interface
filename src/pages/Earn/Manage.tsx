@@ -103,7 +103,9 @@ export default function Manage({
 
   const [, stakingTokenPair] = usePair(tokenA, tokenB)
 
-  const stakingInfo = useStakingInfo(stakingTokenPair)?.[0]
+  const stakingInfo = useStakingInfo(undefined, stakingTokenPair)?.[0]
+
+  console.log({ stakingInfo })
 
   const currentBlock = useBlockNumber()
 

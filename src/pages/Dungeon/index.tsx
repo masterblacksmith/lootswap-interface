@@ -115,7 +115,8 @@ export default function Dungeon({
 }: RouteComponentProps<{ currencyIdA: string; currencyIdB: string }>) {
   const { account, chainId } = useActiveWeb3React()
 
-  const filteredStakingInfos = filterStakingInfos(useStakingInfo(), true)
+  const isActive = true
+  const filteredStakingInfos = filterStakingInfos(useStakingInfo(isActive), isActive)
   const TVLs = useTotalCombinedTVL(filteredStakingInfos)
 
   const govToken = useGovernanceToken()

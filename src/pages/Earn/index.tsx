@@ -16,6 +16,7 @@ import { CardSection, ExtraDataCard, CardNoise, CardBGImage } from '../../compon
 import Loader from '../../components/Loader'
 import { useActiveWeb3React } from '../../hooks'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
+import useCalculateStakingInfoMembers from '../../hooks/useCalculateStakingInfoMembers'
 import useTotalCombinedTVL from '../../hooks/useTotalCombinedTVL'
 import useBaseStakingRewardsEmission from '../../hooks/useBaseStakingRewardsEmission'
 import { OutlineCard } from '../../components/Card'
@@ -64,7 +65,8 @@ export default function Earn() {
   const { chainId, account } = useActiveWeb3React()
   const govToken = useGovernanceToken()
   const blockchainSettings = chainId ? BLOCKCHAIN_SETTINGS[chainId] : undefined
-  const stakingInfos = useStakingInfo()
+  const activePoolsOnly = true
+  const stakingInfos = useStakingInfo(activePoolsOnly)
 
   /**
    * only show staking cards with balance
@@ -79,8 +81,11 @@ export default function Earn() {
   const emissionsPerMinute =
     baseEmissions && blockchainSettings ? baseEmissions.multiply(JSBI.BigInt(blocksPerMinute)) : undefined
 
-  const activeStakingInfos = filterStakingInfos(stakingInfos, true)
-  const inactiveStakingInfos = filterStakingInfos(stakingInfos, false)
+  const activeStakingInfos = filterStakingInfos(stakingInfos, activePoolsOnly)
+  const stakingInfoStats = useCalculateStakingInfoMembers(chainId)
+  const hasArchivedStakingPools =
+    (stakingInfoStats?.inactive && stakingInfoStats?.inactive > 0) ||
+    filterStakingInfos(stakingInfos, false)?.length > 0
 
   const TVLs = useTotalCombinedTVL(activeStakingInfos)
 
@@ -101,7 +106,7 @@ export default function Earn() {
                   governance token.
                 </TYPE.white>
               </RowBetween>{' '}
-              {inactiveStakingInfos?.length > 0 && (
+              {hasArchivedStakingPools && (
                 <RowBetween>
                   <StyledInternalLink to={`/staking/archived`}>
                     <ButtonWhite padding="8px" borderRadius="8px">

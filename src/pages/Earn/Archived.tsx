@@ -61,7 +61,7 @@ export default function EarnArchived() {
   const { chainId, account } = useActiveWeb3React()
   const govToken = useGovernanceToken()
   const blockchainSettings = chainId ? BLOCKCHAIN_SETTINGS[chainId] : undefined
-  const stakingInfos = useStakingInfo()
+  const stakingInfos = useStakingInfo(false)
 
   /**
    * only show staking cards with balance

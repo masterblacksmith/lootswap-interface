@@ -9,7 +9,8 @@ import filterStakingInfos from '../../utils/filterStakingInfos'
 export default function CombinedTVL({}) {
   const { chainId } = useActiveWeb3React()
   const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
-  const filteredStakingInfos = filterStakingInfos(useStakingInfo(), true)
+  const isActive = true
+  const filteredStakingInfos = filterStakingInfos(useStakingInfo(isActive), isActive)
   const TVLs = useTotalCombinedTVL(filteredStakingInfos)
 
   return (
