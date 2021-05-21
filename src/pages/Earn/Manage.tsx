@@ -105,8 +105,6 @@ export default function Manage({
 
   const stakingInfo = useStakingInfo(undefined, stakingTokenPair)?.[0]
 
-  console.log({ stakingInfo })
-
   const currentBlock = useBlockNumber()
 
   const rewardsStarted = useMemo<boolean>(() => {
