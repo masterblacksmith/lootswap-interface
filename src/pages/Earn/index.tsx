@@ -8,7 +8,7 @@ import { useStakingInfo } from '../../state/stake/hooks'
 import { TYPE, StyledInternalLink } from '../../theme'
 //import { ButtonPrimary } from '../../components/Button'
 import PoolCard from '../../components/earn/PoolCard'
-import { ButtonWhite } from '../../components/Button'
+import { CustomButtonWhite } from '../../components/Button'
 import AwaitingRewards from '../../components/earn/AwaitingRewards'
 import { RowBetween } from '../../components/Row'
 import { CardSection, ExtraDataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
@@ -113,22 +113,22 @@ export default function Earn() {
               </RowBetween>{' '}
               {stakingInfosWithRewards?.length > 0 && (
                 <RowBetween>
-                  <ButtonWhite
+                  <CustomButtonWhite
                     padding="8px"
                     borderRadius="8px"
                     width="7em"
                     onClick={() => setShowClaimRewardsModal(true)}
                   >
                     Claim all ({stakingInfosWithRewards.length})
-                  </ButtonWhite>
+                  </CustomButtonWhite>
                 </RowBetween>
               )}
               {hasArchivedStakingPools && (
                 <RowBetween>
                   <StyledInternalLink to={`/staking/archived`}>
-                    <ButtonWhite padding="8px" borderRadius="8px">
+                    <CustomButtonWhite padding="8px" borderRadius="8px">
                       Archived Pools
-                    </ButtonWhite>
+                    </CustomButtonWhite>
                   </StyledInternalLink>
                 </RowBetween>
               )}
