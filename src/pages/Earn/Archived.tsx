@@ -17,7 +17,7 @@ import { useActiveWeb3React } from '../../hooks'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
 import useBaseStakingRewardsEmission from '../../hooks/useBaseStakingRewardsEmission'
 import { OutlineCard } from '../../components/Card'
-import filterStakingInfos from '../../utils/filterStakingInfos'
+import useFilterStakingInfos from '../../hooks/useFilterStakingInfos'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -76,7 +76,7 @@ export default function EarnArchived() {
   const emissionsPerMinute =
     baseEmissions && blockchainSettings ? baseEmissions.multiply(JSBI.BigInt(blocksPerMinute)) : undefined
 
-  const inactiveStakingInfos = filterStakingInfos(stakingInfos, false)
+  const inactiveStakingInfos = useFilterStakingInfos(stakingInfos, false)
 
   return (
     <PageWrapper gap="lg" justify="center">

@@ -10,7 +10,7 @@ import { Interface } from '@ethersproject/abi'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
 import useTokensWithWETHPrices from '../../hooks/useTokensWithWETHPrices'
 import useBUSDPrice from '../../hooks/useBUSDPrice'
-import useFilterStakingInfo from '../../hooks/useFilterStakingInfo'
+import useFilterStakingRewardsInfo from '../../hooks/useFilterStakingRewardsInfo'
 import getBlocksPerYear from '../../utils/getBlocksPerYear'
 import calculateWethAdjustedTotalStakedAmount from '../../utils/calculateWethAdjustedTotalStakedAmount'
 import calculateApr from '../../utils/calculateApr'
@@ -74,7 +74,7 @@ export function useStakingInfo(active: boolean | undefined = undefined, pairToFi
   const { chainId, account } = useActiveWeb3React()
   const masterLooterContract = useMasterLooterContract()
 
-  const masterInfo = useFilterStakingInfo(chainId, active, pairToFilterBy)
+  const masterInfo = useFilterStakingRewardsInfo(chainId, active, pairToFilterBy)
 
   const tokensWithPrices = useTokensWithWETHPrices()
 

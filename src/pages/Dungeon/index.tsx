@@ -28,7 +28,7 @@ import useGovernanceToken from 'hooks/useGovernanceToken'
 import useTotalCombinedTVL from '../../hooks/useTotalCombinedTVL'
 import useDungeonRatio from '../../hooks/useDungeonRatio'
 import { useStakingInfo } from '../../state/stake/hooks'
-import filterStakingInfos from '../../utils/filterStakingInfos'
+import useFilterStakingInfos from '../../hooks/useFilterStakingInfos'
 import CombinedTVL from '../../components/CombinedTVL'
 
 const PageWrapper = styled(AutoColumn)`
@@ -116,7 +116,7 @@ export default function Dungeon({
   const { account, chainId } = useActiveWeb3React()
 
   const isActive = true
-  const filteredStakingInfos = filterStakingInfos(useStakingInfo(isActive), isActive)
+  const filteredStakingInfos = useFilterStakingInfos(useStakingInfo(isActive), isActive)
   const TVLs = useTotalCombinedTVL(filteredStakingInfos)
 
   const govToken = useGovernanceToken()

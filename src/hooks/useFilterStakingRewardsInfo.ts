@@ -1,8 +1,8 @@
-import { ChainId, Pair } from '@lootswap/sdk'
 import { useMemo } from 'react'
+import { ChainId, Pair } from '@lootswap/sdk'
 import { STAKING_REWARDS_INFO, StakingRewardsInfo } from '../constants/staking'
 
-export default function useFilterStakingInfo(
+export default function useFilterStakingRewardsInfo(
   chainId: ChainId | undefined,
   active: boolean | undefined = undefined,
   pairToFilterBy?: Pair | null

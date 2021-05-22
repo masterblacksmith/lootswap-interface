@@ -4,13 +4,13 @@ import { useActiveWeb3React } from '../../hooks'
 import useTotalCombinedTVL from '../../hooks/useTotalCombinedTVL'
 import { CustomMouseoverTooltip } from '../Tooltip/custom'
 import { DUNGEON_SETTINGS } from '../../constants'
-import filterStakingInfos from '../../utils/filterStakingInfos'
+import useFilterStakingInfos from '../../hooks/useFilterStakingInfos'
 
 export default function CombinedTVL({}) {
   const { chainId } = useActiveWeb3React()
   const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
   const isActive = true
-  const filteredStakingInfos = filterStakingInfos(useStakingInfo(isActive), isActive)
+  const filteredStakingInfos = useFilterStakingInfos(useStakingInfo(isActive), isActive)
   const TVLs = useTotalCombinedTVL(filteredStakingInfos)
 
   return (
