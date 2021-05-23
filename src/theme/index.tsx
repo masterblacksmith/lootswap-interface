@@ -1,4 +1,3 @@
-import { transparentize } from 'polished'
 import React, { useMemo } from 'react'
 import styled, {
   ThemeProvider as StyledComponentsThemeProvider,
@@ -11,7 +10,8 @@ import { Text, TextProps } from 'rebass'
 import { Colors } from './styled'
 
 import useBlockchain from '../hooks/useBlockchain'
-import { Blockchain } from '@lootswap/sdk'
+import { Blockchain } from '@venomswap/sdk'
+import bgimage from '../assets/images/loot_background.png'
 
 export * from './components'
 
@@ -425,12 +425,17 @@ html {
 
 body {
   min-height: 100vh;
-  background-position: 0 -30vh;
-  background-repeat: no-repeat;
-  background-image: ${({ theme }) =>
-    `radial-gradient(50% 50% at 50% 50%, ${transparentize(0.9, theme.primary1)} 0%, ${transparentize(
-      1,
-      theme.bg1
-    )} 100%)`};
+}
+body::after {
+  content: "";
+  background-size: cover;
+  background-image: url(${bgimage});
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 `

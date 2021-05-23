@@ -1,4 +1,4 @@
-import { Token, TokenAmount, Pair, JSBI } from '@lootswap/sdk'
+import { Token, TokenAmount, Pair, JSBI } from '@venomswap/sdk'
 
 export default function calculateTotalStakedAmount(
   baseToken: Token,

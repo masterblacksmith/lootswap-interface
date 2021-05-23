@@ -1,6 +1,6 @@
-import { Blockchain } from '@lootswap/sdk'
+import { Blockchain } from '@venomswap/sdk'
 import { BLOCKCHAIN } from '../connectors'
-import lootSwapTokenLogo from '../assets/images/lootswap-token-logo.png'
+import lootSwapTokenLogo from '../assets/images/loot_logo.png'
 
 export default function getTokenLogo(): string {
   switch (BLOCKCHAIN) {

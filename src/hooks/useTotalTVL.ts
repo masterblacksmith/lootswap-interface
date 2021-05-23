@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Fraction, JSBI } from '@lootswap/sdk'
+import { Fraction, JSBI } from '@venomswap/sdk'
 import { StakingInfo } from '../state/stake/hooks'
 
 export default function useTotalTVL(stakingInfos: StakingInfo[]): Fraction {

@@ -1,4 +1,4 @@
-import { TokenAmount, JSBI } from '@lootswap/sdk'
+import { TokenAmount, JSBI } from '@venomswap/sdk'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useEffect, useState } from 'react'
 import { useActiveWeb3React } from '../../hooks'

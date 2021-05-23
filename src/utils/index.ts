@@ -3,9 +3,9 @@ import { getAddress } from '@ethersproject/address'
 import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
-import { abi as IUniswapV2Router02ABI } from '@lootswap/periphery/build/IUniswapV2Router02.json'
+import { abi as IUniswapV2Router02ABI } from '@venomswap/periphery/build/IUniswapV2Router02.json'
 import { ROUTER_ADDRESSES } from '../constants'
-import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, DEFAULT_CURRENCIES } from '@lootswap/sdk'
+import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, DEFAULT_CURRENCIES } from '@venomswap/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 import { useActiveWeb3React } from '../hooks/index'
 
@@ -107,6 +107,7 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 export function getRouterContract(chainId: number, library: Web3Provider, account?: string): Contract {
   const convertedChainId = chainId as ChainId
   const routerAddress = (chainId && ROUTER_ADDRESSES[convertedChainId]) as string
+  console.log('router address', routerAddress)
   return getContract(routerAddress, IUniswapV2Router02ABI, library, account)
 }
 

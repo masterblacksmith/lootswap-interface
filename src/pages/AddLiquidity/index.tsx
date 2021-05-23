@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, TokenAmount, WETH, DEFAULT_CURRENCIES } from '@lootswap/sdk'
+import { Currency, currencyEquals, TokenAmount, WETH, DEFAULT_CURRENCIES } from '@venomswap/sdk'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -133,7 +133,6 @@ export default function AddLiquidity({
   async function onAdd() {
     if (!chainId || !library || !account) return
     const router = getRouterContract(chainId, library, account)
-    console.log('router', router)
 
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
     if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {
@@ -149,12 +148,10 @@ export default function AddLiquidity({
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
       value: BigNumber | null
-    console.log('estimate', estimate, amountsMin)
     if (
       (currencyA && DEFAULT_CURRENCIES.includes(currencyA)) ||
       (currencyB && DEFAULT_CURRENCIES.includes(currencyB))
     ) {
-      console.log('test1a')
       const tokenBIsETH = currencyB && DEFAULT_CURRENCIES.includes(currencyB)
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
@@ -168,7 +165,6 @@ export default function AddLiquidity({
       ]
       value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
     } else {
-      console.log('test1b')
       estimate = router.estimateGas.addLiquidity
       method = router.addLiquidity
       args = [
@@ -184,17 +180,14 @@ export default function AddLiquidity({
       value = null
     }
 
-    console.log('test1c', value, amountsMin, account)
     setAttemptingTxn(true)
     await estimate(...args, value ? { value } : {})
-      .then(estimatedGasLimit => {
-        console.log('estimate1', estimatedGasLimit)
+      .then(estimatedGasLimit =>
         method(...args, {
           ...(value ? { value } : {}),
           gasLimit: calculateGasMargin(estimatedGasLimit)
         }).then(response => {
           setAttemptingTxn(false)
-          console.log('test1d')
 
           addTransaction(response, {
             summary:
@@ -216,10 +209,9 @@ export default function AddLiquidity({
             label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/')
           })
         })
-      })
+      )
       .catch(error => {
         setAttemptingTxn(false)
-        console.log('test1e')
         // we only care if the error is something _other_ than the user rejected the tx
         if (error?.code !== 4001) {
           console.error(error)

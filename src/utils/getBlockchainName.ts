@@ -1,4 +1,4 @@
-import { ChainId } from '@lootswap/sdk'
+import { ChainId } from '@venomswap/sdk'
 
 export default function getBlockchainName(chainId: ChainId | undefined): string {
   switch (chainId) {

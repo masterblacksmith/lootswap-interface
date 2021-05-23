@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Token, WETH, Price } from '@lootswap/sdk'
+import { Token, WETH, Price } from '@venomswap/sdk'
 import { useActiveWeb3React } from './index'
 import { usePair } from '../data/Reserves'
 

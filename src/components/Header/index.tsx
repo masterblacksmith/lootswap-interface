@@ -1,9 +1,10 @@
-import { ChainId, TokenAmount, Blockchain } from '@lootswap/sdk'
+import { ChainId, TokenAmount, Blockchain } from '@venomswap/sdk'
 import React, { useState } from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
 import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
+import { isMobile } from 'react-device-detect'
 
 import styled from 'styled-components'
 
@@ -219,7 +220,7 @@ const StyledNavLink = styled(NavLink).attrs({
   color: ${({ theme }) => theme.text2};
   font-size: 1rem;
   width: fit-content;
-  margin: 0 12px;
+  margin: ${isMobile ? '0 5px' : '0 12px'};
   font-weight: 500;
 
   &.${activeClassName} {
@@ -353,7 +354,7 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img width={'256px'} src={darkMode ? logoDark : logo} alt="logo" />
+            <img width={isMobile ? '125px' : '256px'} src={darkMode ? logoDark : logo} alt="logo" />
           </UniIcon>
         </Title>
         <HeaderLinks>

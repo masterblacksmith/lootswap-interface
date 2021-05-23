@@ -1,4 +1,4 @@
-import { Token } from '@lootswap/sdk'
+import { Token } from '@venomswap/sdk'
 import { CallState } from '../state/multicall/hooks'
 
 export default function validStakingInfo(

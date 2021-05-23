@@ -1,4 +1,4 @@
-import { WETH, Token } from '@lootswap/sdk'
+import { WETH, Token } from '@venomswap/sdk'
 import { useActiveWeb3React } from './index'
 
 export default function useWeth(): Token | undefined {

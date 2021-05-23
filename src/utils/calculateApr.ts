@@ -1,4 +1,4 @@
-import { Price, Fraction, TokenAmount, JSBI } from '@lootswap/sdk'
+import { Price, Fraction, TokenAmount, JSBI } from '@venomswap/sdk'
 import { utils } from 'ethers'
 
 export default function calculateApr(

@@ -1,4 +1,4 @@
-import { Token } from '@lootswap/sdk'
+import { Token } from '@venomswap/sdk'
 import { PIT } from '../constants'
 import { useActiveWeb3React } from './index'
 

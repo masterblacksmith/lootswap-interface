@@ -1,4 +1,4 @@
-import { Blockchain, ChainId } from '@lootswap/sdk'
+import { Blockchain, ChainId } from '@venomswap/sdk'
 
 export default function getBlockchain(chainId: ChainId | undefined): Blockchain {
   switch (chainId) {

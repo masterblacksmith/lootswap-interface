@@ -1,4 +1,4 @@
-import { WETH, Token, Blockchain } from '@lootswap/sdk'
+import { WETH, Token, Blockchain } from '@venomswap/sdk'
 import { useMemo } from 'react'
 import useGovernanceToken from './useGovernanceToken'
 import useTokenWethPrice from './useTokenWethPrice'

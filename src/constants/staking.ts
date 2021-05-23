@@ -11,7 +11,7 @@ export const STAKING_REWARDS_INFO: {
     {
       pid: 0,
       tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'WONE/BUSD')
-    },
+    }
   ],
   [ChainId.HARMONY_TESTNET]: [
     {

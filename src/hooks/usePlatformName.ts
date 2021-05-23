@@ -1,4 +1,4 @@
-import { Blockchain } from '@lootswap/sdk'
+import { Blockchain } from '@venomswap/sdk'
 import useBlockchain from './useBlockchain'
 
 export default function usePlatformName(): string {

@@ -1,4 +1,4 @@
-import { ChainId, Pair, Token } from '@lootswap/sdk'
+import { ChainId, Pair, Token } from '@venomswap/sdk'
 import flatMap from 'lodash.flatmap'
 import ReactGA from 'react-ga'
 import { useCallback, useMemo } from 'react'
