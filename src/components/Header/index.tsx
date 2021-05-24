@@ -8,8 +8,8 @@ import { isMobile } from 'react-device-detect'
 
 import styled from 'styled-components'
 
-import LootSwapLogo from '../../assets/images/lootswap.png'
-import LootSwapLogoDark from '../../assets/images/lootswap.png'
+import LootSwapLogo from '../../assets/images/loot_logo.png'
+import LootSwapLogoDark from '../../assets/images/loot_logo.png'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances, useAggregateGovTokenBalance } from '../../state/wallet/hooks'

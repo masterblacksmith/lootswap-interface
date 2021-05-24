@@ -16,9 +16,9 @@ export const ROUTER_ADDRESSES: { [chainId in ChainId]: string } = {
   [ChainId.GÖRLI]: ZERO_ONE_ADDRESS,
   [ChainId.KOVAN]: ZERO_ONE_ADDRESS,
   [ChainId.BSC_MAINNET]: ZERO_ONE_ADDRESS,
-  [ChainId.BSC_TESTNET]: '0xDBbEbd367133609DA8c7AcDF96A4498E4F0f1F9c',
+  [ChainId.BSC_TESTNET]: ZERO_ONE_ADDRESS,
   [ChainId.HARMONY_MAINNET]: '0x94cfe1d4bE2c3d73A0e61644c80e2a7020409055',
-  [ChainId.HARMONY_TESTNET]: '0x8e9A3cE409B13ef459fE4448aE97a79d6Ecd8b4b'
+  [ChainId.HARMONY_TESTNET]: ZERO_ONE_ADDRESS
 }
 
 export const GOVERNANCE_ADDRESS = '0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F'
@@ -32,13 +32,7 @@ export const GOVERNANCE_TOKEN: { [chainId in ChainId]: Token } = {
   [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, ZERO_ONE_ADDRESS, 18, 'VIPER', 'Viper'),
   [ChainId.KOVAN]: new Token(ChainId.KOVAN, ZERO_ONE_ADDRESS, 18, 'VIPER', 'Viper'),
   [ChainId.BSC_MAINNET]: new Token(ChainId.BSC_MAINNET, ZERO_ONE_ADDRESS, 18, 'COBRA', 'Cobra'),
-  [ChainId.BSC_TESTNET]: new Token(
-    ChainId.BSC_TESTNET,
-    '0x955F82C58dCd3c1369769aEc1Bbd80611b1cff30',
-    18,
-    'COBRA',
-    'Cobra'
-  ),
+  [ChainId.BSC_TESTNET]: new Token(ChainId.BSC_TESTNET, ZERO_ONE_ADDRESS, 18, 'COBRA', 'Cobra'),
   [ChainId.HARMONY_MAINNET]: new Token(
     ChainId.HARMONY_MAINNET,
     '0x32eD93e5331AaA092E1817FbFd3C4d80647F8f04',
@@ -46,13 +40,7 @@ export const GOVERNANCE_TOKEN: { [chainId in ChainId]: Token } = {
     'GUESTV5',
     'GuestV5'
   ),
-  [ChainId.HARMONY_TESTNET]: new Token(
-    ChainId.HARMONY_TESTNET,
-    '0x69A655c56087D927eb05247FB56495a0f19B9f70',
-    18,
-    'VIPER',
-    'Viper'
-  )
+  [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, 'VIPER', 'Viper')
 }
 
 export const MASTER_BREEDER: { [chainId in ChainId]: string } = {
@@ -62,9 +50,9 @@ export const MASTER_BREEDER: { [chainId in ChainId]: string } = {
   [ChainId.GÖRLI]: ZERO_ONE_ADDRESS,
   [ChainId.KOVAN]: ZERO_ONE_ADDRESS,
   [ChainId.BSC_MAINNET]: ZERO_ONE_ADDRESS,
-  [ChainId.BSC_TESTNET]: '0x8E7Cfa9685935fd87562E5749eFCAF64Eef61DD6',
+  [ChainId.BSC_TESTNET]: ZERO_ONE_ADDRESS,
   [ChainId.HARMONY_MAINNET]: '0x7AbC67c8D4b248A38B0dc5756300630108Cb48b4',
-  [ChainId.HARMONY_TESTNET]: '0x651e2E555164834bc42303c1a1B4f795a9Fb7619'
+  [ChainId.HARMONY_TESTNET]: ZERO_ONE_ADDRESS
 }
 
 export const PIT_BREEDER: { [chainId in ChainId]: string } = {
@@ -74,9 +62,9 @@ export const PIT_BREEDER: { [chainId in ChainId]: string } = {
   [ChainId.GÖRLI]: ZERO_ONE_ADDRESS,
   [ChainId.KOVAN]: ZERO_ONE_ADDRESS,
   [ChainId.BSC_MAINNET]: ZERO_ONE_ADDRESS,
-  [ChainId.BSC_TESTNET]: '0x38a75B033c2C3444Cb91D580645F76d042F98EdA',
-  [ChainId.HARMONY_MAINNET]: '0x08913d353091e24B361f0E519e2f7aD07a78995d',
-  [ChainId.HARMONY_TESTNET]: '0x3945509547b74370468238F715e2dcf698a088B4'
+  [ChainId.BSC_TESTNET]: ZERO_ONE_ADDRESS,
+  [ChainId.HARMONY_MAINNET]: '0x41D60C97b3346b20B713ed2Ff49b6c83a2CEF952',
+  [ChainId.HARMONY_TESTNET]: ZERO_ONE_ADDRESS
 }
 
 export const PIT: { [chainId in ChainId]: Token } = {
@@ -86,27 +74,15 @@ export const PIT: { [chainId in ChainId]: Token } = {
   [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, ZERO_ONE_ADDRESS, 18, 'aLOOT', 'AutoLoot'),
   [ChainId.KOVAN]: new Token(ChainId.KOVAN, ZERO_ONE_ADDRESS, 18, 'aLOOT', 'AutoLoot'),
   [ChainId.BSC_MAINNET]: new Token(ChainId.BSC_MAINNET, ZERO_ONE_ADDRESS, 18, 'aLOOT', 'AutoLoot'),
-  [ChainId.BSC_TESTNET]: new Token(
-    ChainId.BSC_TESTNET,
-    '0x6F08B9914A4BDce7a2220D9f72BC2728Bc083A18',
-    18,
-    'aLOOT',
-    'AutoLoot'
-  ),
+  [ChainId.BSC_TESTNET]: new Token(ChainId.BSC_TESTNET, ZERO_ONE_ADDRESS, 18, 'aLOOT', 'AutoLoot'),
   [ChainId.HARMONY_MAINNET]: new Token(
     ChainId.HARMONY_MAINNET,
-    '0xE064a68994e9380250CfEE3E8C0e2AC5C0924548',
+    '0xD17739A2Fd68E3A2aAe55b60044cbd44d1dBCbf8',
     18,
     'aLOOT',
     'AutoLoot'
   ),
-  [ChainId.HARMONY_TESTNET]: new Token(
-    ChainId.HARMONY_TESTNET,
-    '0x1e11CA9830Cd3a9867990CE2769EDf77F21ae5FA',
-    18,
-    'aLOOT',
-    'AutoLoot'
-  )
+  [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, 'aLOOT', 'AutoLoot')
 }
 
 export const PIT_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
