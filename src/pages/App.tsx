@@ -44,7 +44,13 @@ const AppWrapper = styled.div`
   align-items: flex-start;
   overflow-x: hidden;
 `
-
+const WarningBanner = styled.div`
+  width: 100%;
+  text-align: center;
+  background: #a33;
+  display: block;
+  font-weight: bold;
+`
 const HeaderWrapper = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
   width: 100%;
@@ -95,6 +101,12 @@ export default function App() {
       <Route component={GoogleAnalyticsReporter} />
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
+        <HeaderWrapper>
+          <WarningBanner>
+            Warning: These are alpha contracts and will change before we launch. Any token deposited in Pools will be
+            lost!
+          </WarningBanner>
+        </HeaderWrapper>
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>

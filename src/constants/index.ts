@@ -37,8 +37,8 @@ export const GOVERNANCE_TOKEN: { [chainId in ChainId]: Token } = {
     ChainId.HARMONY_MAINNET,
     '0x32eD93e5331AaA092E1817FbFd3C4d80647F8f04',
     18,
-    'GUESTV5',
-    'GuestV5'
+    'LOOT',
+    'Loot'
   ),
   [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, 'VIPER', 'Viper')
 }
@@ -105,8 +105,15 @@ export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
   [ChainId.KOVAN]: [''],
   [ChainId.BSC_MAINNET]: ['loot.exchange', 'lootswap.io', 'lootdex.org'],
   [ChainId.BSC_TESTNET]: ['loot.exchange', 'lootswap.io', 'lootdex.org'],
-  [ChainId.HARMONY_MAINNET]: ['viper.exchange', 'lootswap.one', 'lootswap.com', 'lootswap.io', 'lootswap.org'],
-  [ChainId.HARMONY_TESTNET]: ['viper.exchange', 'lootswap.one', 'lootswap.com', 'lootswap.io', 'lootswap.org']
+  [ChainId.HARMONY_MAINNET]: [
+    'lootswap.exchange',
+    'alpha.lootswap.finance',
+    'lootswap.one',
+    'lootswap.finance',
+    'lootswap.io',
+    'lootswap.org'
+  ],
+  [ChainId.HARMONY_TESTNET]: ['lootswap.exchange', 'lootswap.one', 'lootswap.finance', 'lootswap.io', 'lootswap.org']
 }
 
 export { PRELOADED_PROPOSALS } from './proposals'

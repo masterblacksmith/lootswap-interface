@@ -344,6 +344,7 @@ export default function Header() {
 
   const countUpValue = aggregateBalance?.toFixed(0) ?? '0'
   const countUpValuePrevious = usePrevious(countUpValue) ?? '0'
+  const showEarn = false
 
   return (
     <HeaderFrame>
@@ -374,12 +375,16 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
-          <StyledNavLink id={`stake-nav-link`} to={'/staking'}>
-            Staking
-          </StyledNavLink>
-          <StyledNavLink id={`stake-nav-link`} to={`${pitSettings?.path}`}>
-            {pitSettings?.name}
-          </StyledNavLink>
+          {showEarn && (
+            <StyledNavLink id={`stake-nav-link`} to={'/staking'}>
+              Staking
+            </StyledNavLink>
+          )}
+          {showEarn && (
+            <StyledNavLink id={`stake-nav-link`} to={`${pitSettings?.path}`}>
+              {pitSettings?.name}
+            </StyledNavLink>
+          )}
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>
