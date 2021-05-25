@@ -132,7 +132,7 @@ export default function RemoveLiquidity({
       ]
 
       const domain = {
-        name: 'Venom LP Token',
+        name: 'Loot LP Token',
         version: '1',
         chainId: chainId,
         verifyingContract: pair.liquidityToken.address

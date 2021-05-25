@@ -344,7 +344,7 @@ export default function Header() {
 
   const countUpValue = aggregateBalance?.toFixed(0) ?? '0'
   const countUpValuePrevious = usePrevious(countUpValue) ?? '0'
-  const showEarn = false
+  const showEarn = true
 
   return (
     <HeaderFrame>
