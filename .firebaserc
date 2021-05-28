@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "lootswap-9652c"
+    "dev": "lootswap-9652c",
+    "production": "lootswap-official"
   }
 }

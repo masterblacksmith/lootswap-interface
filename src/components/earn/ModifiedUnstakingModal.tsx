@@ -19,7 +19,7 @@ import usePlatformName from '../../hooks/usePlatformName'
 import { BlueCard } from '../Card'
 import { ColumnCenter } from '../Column'
 import { calculateGasMargin } from '../../utils'
-import { useMasterBreederContract } from '../../hooks/useContract'
+import { useMasterLooterContract } from '../../hooks/useContract'
 import useCalculateWithdrawalFee from '../../hooks/useCalculateWithdrawalFee'
 import useBlockchain from '../../hooks/useBlockchain'
 
@@ -87,7 +87,7 @@ export default function ModifiedStakingModal({ isOpen, onDismiss, stakingInfo }:
   }, [onDismiss])
 
   const platformName = usePlatformName()
-  const masterBreeder = useMasterBreederContract()
+  const masterLooter = useMasterLooterContract()
   const referral = ZERO_ADDRESS
 
   // pair contract for this token to be staked
@@ -101,13 +101,13 @@ export default function ModifiedStakingModal({ isOpen, onDismiss, stakingInfo }:
   }
 
   async function onWithdraw() {
-    if (masterBreeder && stakingInfo?.stakedAmount) {
+    if (masterLooter && stakingInfo?.stakedAmount) {
       setAttempting(true)
 
       const formattedAmount = `0x${parsedAmount?.raw.toString(16)}`
-      const estimatedGas = await masterBreeder.estimateGas.withdraw(stakingInfo.pid, formattedAmount, referral)
+      const estimatedGas = await masterLooter.estimateGas.withdraw(stakingInfo.pid, formattedAmount, referral)
 
-      await masterBreeder
+      await masterLooter
         .withdraw(stakingInfo.pid, formattedAmount, referral, {
           gasLimit: calculateGasMargin(estimatedGas)
         })

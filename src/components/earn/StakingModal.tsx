@@ -18,7 +18,7 @@ import { StakingInfo, useDerivedStakeInfo } from '../../state/stake/hooks'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { LoadingView, SubmittedView } from '../ModalViews'
-import { useMasterBreederContract } from '../../hooks/useContract'
+import { useMasterLooterContract } from '../../hooks/useContract'
 import { ZERO_ADDRESS } from '../../constants'
 import { BlueCard } from '../Card'
 import { ColumnCenter } from '../Column'
@@ -76,7 +76,7 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
   }, [onDismiss])
 
   const govToken = useGovernanceToken()
-  const masterBreeder = useMasterBreederContract()
+  const masterLooter = useMasterLooterContract()
   const referral = ZERO_ADDRESS
 
   // pair contract for this token to be staked
@@ -86,17 +86,17 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
   // approval data for stake
   const deadline = useTransactionDeadline()
   const [signatureData, setSignatureData] = useState<{ v: number; r: string; s: string; deadline: number } | null>(null)
-  const [approval, approveCallback] = useApproveCallback(parsedAmount, masterBreeder?.address)
+  const [approval, approveCallback] = useApproveCallback(parsedAmount, masterLooter?.address)
 
   async function onStake() {
     setAttempting(true)
-    if (masterBreeder && parsedAmount && deadline) {
+    if (masterLooter && parsedAmount && deadline) {
       if (approval === ApprovalState.APPROVED) {
         const formattedAmount = `0x${parsedAmount.raw.toString(16)}`
 
-        const estimatedGas = await masterBreeder.estimateGas.deposit(stakingInfo.pid, formattedAmount, referral)
+        const estimatedGas = await masterLooter.estimateGas.deposit(stakingInfo.pid, formattedAmount, referral)
 
-        await masterBreeder
+        await masterLooter
           .deposit(stakingInfo.pid, formattedAmount, referral, {
             gasLimit: calculateGasMargin(estimatedGas)
           })

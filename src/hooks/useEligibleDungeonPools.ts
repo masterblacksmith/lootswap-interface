@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { CallState } from '../state/multicall/hooks'
 import { JSBI } from '@venomswap/sdk'
 
-export default function useEligiblePitPools(
+export default function useEligibleDungeonPools(
   stakingPools: any,
   balanceResults: CallState[],
   minimumAmountWei = '10000000000000000'

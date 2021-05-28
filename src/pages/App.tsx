@@ -19,7 +19,7 @@ import {
 } from './AddLiquidity/redirects'
 import Earn from './Earn'
 import Manage from './Earn/Manage'
-import Pit from './Pit'
+import Dungeon from './Dungeon'
 import MigrateV1 from './MigrateV1'
 import MigrateV1Exchange from './MigrateV1/MigrateV1Exchange'
 import RemoveV1Exchange from './MigrateV1/RemoveV1Exchange'
@@ -31,7 +31,7 @@ import Swap from './Swap'
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import Vote from './Vote'
 import VotePage from './Vote/VotePage'
-import { PIT_SETTINGS } from '../constants'
+import { DUNGEON_SETTINGS } from '../constants'
 import { useActiveWeb3React } from '../hooks'
 import usePlatformName from '../hooks/usePlatformName'
 
@@ -89,12 +89,15 @@ function TopLevelModals() {
 export default function App() {
   const { chainId } = useActiveWeb3React()
   const blockchain = useBlockchain()
-  const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
+  const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
   const platformName = usePlatformName()
 
   useEffect(() => {
     document.title = platformName
   }, [platformName])
+
+  const comingSoon = false
+  const showWarning = false
 
   return (
     <Suspense fallback={null}>
@@ -102,10 +105,12 @@ export default function App() {
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
         <HeaderWrapper>
-          <WarningBanner>
-            Warning: These are alpha contracts and will change before we launch. Any token deposited in Pools will be
-            lost!
-          </WarningBanner>
+          {showWarning && (
+            <WarningBanner>
+              Warning: These are alpha contracts and will change before we launch. Any token deposited in Pools will be
+              lost!
+            </WarningBanner>
+          )}
         </HeaderWrapper>
         <HeaderWrapper>
           <Header />
@@ -114,34 +119,37 @@ export default function App() {
           <Popups />
           <Polling />
           <TopLevelModals />
-          <Web3ReactManager>
-            <Switch>
-              <Route exact strict path="/swap" component={Swap} />
-              <Route exact strict path="/claim" component={OpenClaimAddressModalAndRedirectToSwap} />
-              <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
-              <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
-              <Route exact strict path="/find" component={PoolFinder} />
-              <Route exact strict path="/pool" component={Pool} />
-              <Route exact strict path="/staking" component={Earn} />
-              <Route exact strict path={pitSettings?.path} component={Pit} />
-              {blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote" component={Vote} />}
-              <Route exact strict path="/create" component={RedirectToAddLiquidity} />
-              <Route exact path="/add" component={AddLiquidity} />
-              <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
-              <Route exact path="/add/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
-              <Route exact path="/create" component={AddLiquidity} />
-              <Route exact path="/create/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
-              <Route exact path="/create/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
-              <Route exact strict path="/remove/v1/:address" component={RemoveV1Exchange} />
-              <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
-              <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
-              <Route exact strict path="/migrate/v1" component={MigrateV1} />
-              <Route exact strict path="/migrate/v1/:address" component={MigrateV1Exchange} />
-              <Route exact strict path="/staking/:currencyIdA/:currencyIdB" component={Manage} />
-              {blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote/:id" component={VotePage} />}
-              <Route component={RedirectPathToSwapOnly} />
-            </Switch>
-          </Web3ReactManager>
+          {!comingSoon && (
+            <Web3ReactManager>
+              <Switch>
+                <Route exact strict path="/swap" component={Swap} />
+                <Route exact strict path="/claim" component={OpenClaimAddressModalAndRedirectToSwap} />
+                <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
+                <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
+                <Route exact strict path="/find" component={PoolFinder} />
+                <Route exact strict path="/pool" component={Pool} />
+                <Route exact strict path="/staking" component={Earn} />
+                <Route exact strict path={dungeonSettings?.path} component={Dungeon} />
+                {blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote" component={Vote} />}
+                <Route exact strict path="/create" component={RedirectToAddLiquidity} />
+                <Route exact path="/add" component={AddLiquidity} />
+                <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
+                <Route exact path="/add/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
+                <Route exact path="/create" component={AddLiquidity} />
+                <Route exact path="/create/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
+                <Route exact path="/create/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
+                <Route exact strict path="/remove/v1/:address" component={RemoveV1Exchange} />
+                <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
+                <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
+                <Route exact strict path="/migrate/v1" component={MigrateV1} />
+                <Route exact strict path="/migrate/v1/:address" component={MigrateV1Exchange} />
+                <Route exact strict path="/staking/:currencyIdA/:currencyIdB" component={Manage} />
+                {blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote/:id" component={VotePage} />}
+                <Route component={RedirectPathToSwapOnly} />
+              </Switch>
+            </Web3ReactManager>
+          )}
+          {comingSoon && <div>Coming Soon!</div>}
           <Marginer />
         </BodyWrapper>
       </AppWrapper>

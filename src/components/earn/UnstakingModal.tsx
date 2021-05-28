@@ -6,7 +6,7 @@ import { RowBetween } from '../Row'
 import { TYPE, CloseIcon } from '../../theme'
 import { ButtonError } from '../Button'
 import { StakingInfo } from '../../state/stake/hooks'
-import { useMasterBreederContract } from '../../hooks/useContract'
+import { useMasterLooterContract } from '../../hooks/useContract'
 import { SubmittedView, LoadingView } from '../ModalViews'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
@@ -46,12 +46,12 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo }: Staki
     onDismiss()
   }
 
-  const masterBreeder = useMasterBreederContract()
+  const masterLooter = useMasterLooterContract()
 
   async function onWithdraw() {
-    if (masterBreeder && stakingInfo?.stakedAmount) {
+    if (masterLooter && stakingInfo?.stakedAmount) {
       setAttempting(true)
-      await masterBreeder
+      await masterLooter
         .withdraw(stakingInfo.pid, `0x${stakingInfo.stakedAmount.raw.toString(16)}`, referral)
         .then((response: TransactionResponse) => {
           addTransaction(response, {

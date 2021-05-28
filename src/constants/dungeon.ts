@@ -1,7 +1,7 @@
 import { ChainId, Token } from '@venomswap/sdk'
 import getPairTokensWithDefaults from '../utils/getPairTokensWithDefaults'
 
-export const PIT_POOLS: {
+export const DUNGEON_POOLS: {
   [chainId in ChainId]?: {
     pid: number
     tokens: [Token, Token]

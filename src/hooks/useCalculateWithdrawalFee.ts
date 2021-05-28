@@ -1,5 +1,5 @@
 import { useSingleCallResult, useSingleContractMultipleData } from '../state/multicall/hooks'
-import { useMasterBreederContract } from './useContract'
+import { useMasterLooterContract } from './useContract'
 import { useBlockNumber } from '../state/application/hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Fraction, JSBI } from '@venomswap/sdk'
@@ -32,14 +32,14 @@ export default function useCalculateWithdrawalFee(
   let withdrawalFee: Fraction | undefined
 
   const currentBlock = useBlockNumber()
-  const masterBreeder = useMasterBreederContract()
+  const masterLooter = useMasterLooterContract()
 
-  const userInfo = useSingleCallResult(masterBreeder, 'userInfo', [pid, account ? account : ''])?.result
+  const userInfo = useSingleCallResult(masterLooter, 'userInfo', [pid, account ? account : ''])?.result
 
   const defaultStageIndexes = [0, 1, 2, 3, 4, 5, 6, 7]
-  const blockDeltaStartStages = useStages(masterBreeder, 'blockDeltaStartStage', defaultStageIndexes)
-  const blockDeltaEndStages = useStages(masterBreeder, 'blockDeltaEndStage', [0, 1, 2, 3, 4, 5])
-  const devFeeStages = useStages(masterBreeder, 'devFeeStage', defaultStageIndexes)
+  const blockDeltaStartStages = useStages(masterLooter, 'blockDeltaStartStage', defaultStageIndexes)
+  const blockDeltaEndStages = useStages(masterLooter, 'blockDeltaEndStage', [0, 1, 2, 3, 4, 5])
+  const devFeeStages = useStages(masterLooter, 'devFeeStage', defaultStageIndexes)
 
   const lastWithdrawBlock = userInfo?.[3]
   const firstDepositBlock = userInfo?.[4]

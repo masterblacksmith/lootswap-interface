@@ -32,7 +32,7 @@ import Modal from '../Modal'
 import GovTokenBalanceContent from './GovTokenBalanceContent'
 import usePrevious from '../../hooks/usePrevious'
 import { BASE_CURRENCY, BLOCKCHAIN } from '../../connectors'
-import { PIT_SETTINGS } from '../../constants'
+import { DUNGEON_SETTINGS } from '../../constants'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
 
 const HeaderFrame = styled.div`
@@ -307,7 +307,7 @@ export default function Header() {
   const { t } = useTranslation()
 
   const govToken = useGovernanceToken()
-  const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
+  const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
 
   let logoDark: string
   let logo: string
@@ -381,8 +381,8 @@ export default function Header() {
             </StyledNavLink>
           )}
           {showEarn && (
-            <StyledNavLink id={`stake-nav-link`} to={`${pitSettings?.path}`}>
-              {pitSettings?.name}
+            <StyledNavLink id={`stake-nav-link`} to={`${dungeonSettings?.path}`}>
+              {dungeonSettings?.name}
             </StyledNavLink>
           )}
         </HeaderLinks>

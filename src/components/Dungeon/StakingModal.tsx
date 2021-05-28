@@ -1,24 +1,26 @@
 import React, { useState, useCallback } from 'react'
+import useTransactionDeadline from '../../hooks/useTransactionDeadline'
 import Modal from '../Modal'
 import { AutoColumn } from '../Column'
 import styled from 'styled-components'
 import { RowBetween } from '../Row'
 import { TYPE, CloseIcon } from '../../theme'
-import { ButtonError } from '../Button'
+import { ButtonConfirmed, ButtonError } from '../Button'
+import ProgressCircles from '../ProgressSteps'
 import CurrencyInputPanel from '../CurrencyInputPanel'
-import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { TokenAmount, Token } from '@venomswap/sdk'
-import { useDerivedUnstakeInfo } from '../../state/stake/hooks'
+import { useActiveWeb3React } from '../../hooks'
+import { maxAmountSpend } from '../../utils/maxAmountSpend'
+import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback'
+import { useDerivedStakeInfo } from '../../state/stake/hooks'
 //import { wrappedCurrencyAmount } from '../../utils/wrappedCurrency'
 import { TransactionResponse } from '@ethersproject/providers'
-import { useActiveWeb3React } from '../../hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { LoadingView, SubmittedView } from '../ModalViews'
-import { usePitContract } from '../../hooks/useContract'
+import { useDungeonContract } from '../../hooks/useContract'
 import { calculateGasMargin } from '../../utils'
-import { PIT_SETTINGS } from '../../constants'
+import { DUNGEON_SETTINGS } from '../../constants'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
-import usePitToken from '../../hooks/usePitToken'
 
 /*const HypotheticalRewardRate = styled.div<{ dim: boolean }>`
   display: flex;
@@ -38,20 +40,18 @@ interface StakingModalProps {
   isOpen: boolean
   onDismiss: () => void
   stakingToken: Token
-  userLiquidityStaked: TokenAmount | undefined
+  userLiquidityUnstaked: TokenAmount | undefined
 }
 
-export default function ModifiedStakingModal({
-  isOpen,
-  onDismiss,
-  stakingToken,
-  userLiquidityStaked
-}: StakingModalProps) {
-  const { chainId } = useActiveWeb3React()
+export default function StakingModal({ isOpen, onDismiss, stakingToken, userLiquidityUnstaked }: StakingModalProps) {
+  const { chainId, library } = useActiveWeb3React()
 
   // track and parse user input
   const [typedValue, setTypedValue] = useState('')
-  const { parsedAmount, error } = useDerivedUnstakeInfo(typedValue, userLiquidityStaked)
+  const { parsedAmount, error } = useDerivedStakeInfo(typedValue, stakingToken, userLiquidityUnstaked)
+
+  const govToken = useGovernanceToken()
+  const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
 
   // state for pending and submitted txn views
   const addTransaction = useTransactionAdder()
@@ -65,35 +65,40 @@ export default function ModifiedStakingModal({
     onDismiss()
   }, [onDismiss])
 
-  const govToken = useGovernanceToken()
-  const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
-  const pit = usePitContract()
-  const pitToken = usePitToken()
+  const dungeon = useDungeonContract()
 
-  async function onWithdraw() {
-    if (pit && userLiquidityStaked) {
-      setAttempting(true)
+  // approval data for stake
+  const deadline = useTransactionDeadline()
+  const [approval, approveCallback] = useApproveCallback(parsedAmount, dungeon?.address)
 
-      const formattedAmount = `0x${parsedAmount?.raw.toString(16)}`
-      const estimatedGas = await pit.estimateGas.leave(formattedAmount)
+  async function onStake() {
+    setAttempting(true)
+    if (dungeon && parsedAmount && deadline) {
+      if (approval === ApprovalState.APPROVED) {
+        const formattedAmount = `0x${parsedAmount.raw.toString(16)}`
+        const estimatedGas = await dungeon.estimateGas.enter(formattedAmount)
 
-      await pit
-        .leave(formattedAmount, {
-          gasLimit: calculateGasMargin(estimatedGas)
-        })
-        .then((response: TransactionResponse) => {
-          addTransaction(response, {
-            summary: `Withdraw x${govToken?.symbol} from ${pitSettings?.name}`
+        await dungeon
+          .enter(formattedAmount, {
+            gasLimit: calculateGasMargin(estimatedGas)
           })
-          setHash(response.hash)
-        })
-        .catch((error: any) => {
-          setAttempting(false)
-          if (error?.code === -32603) {
-            setFailed(true)
-          }
-          console.log(error)
-        })
+          .then((response: TransactionResponse) => {
+            addTransaction(response, {
+              summary: `Deposit ${govToken?.symbol} to ${dungeonSettings?.name}`
+            })
+            setHash(response.hash)
+          })
+          .catch((error: any) => {
+            setAttempting(false)
+            if (error?.code === -32603) {
+              setFailed(true)
+            }
+            console.log(error)
+          })
+      } else {
+        setAttempting(false)
+        throw new Error('Attempting to stake without approval or a signature. Please contact support.')
+      }
     }
   }
 
@@ -103,49 +108,69 @@ export default function ModifiedStakingModal({
   }, [])
 
   // used for max input button
-  const maxAmountInput = maxAmountSpend(userLiquidityStaked)
+  const maxAmountInput = maxAmountSpend(userLiquidityUnstaked)
   const atMaxAmount = Boolean(maxAmountInput && parsedAmount?.equalTo(maxAmountInput))
-
   const handleMax = useCallback(() => {
     maxAmountInput && onUserInput(maxAmountInput.toExact())
   }, [maxAmountInput, onUserInput])
+
+  async function onAttemptToApprove() {
+    if (!dungeon || !library || !deadline) throw new Error('missing dependencies')
+    const liquidityAmount = parsedAmount
+    if (!liquidityAmount) throw new Error('missing liquidity amount')
+
+    return approveCallback()
+  }
 
   return (
     <Modal isOpen={isOpen} onDismiss={wrappedOnDismiss} maxHeight={90}>
       {!attempting && !hash && !failed && (
         <ContentWrapper gap="lg">
           <RowBetween>
-            <TYPE.mediumHeader>Withdraw</TYPE.mediumHeader>
+            <TYPE.mediumHeader>Deposit</TYPE.mediumHeader>
             <CloseIcon onClick={wrappedOnDismiss} />
           </RowBetween>
+
           <CurrencyInputPanel
             value={typedValue}
             onUserInput={onUserInput}
             onMax={handleMax}
             showMaxButton={!atMaxAmount}
-            currency={pitToken}
+            currency={stakingToken}
             label={''}
             disableCurrencySelect={true}
-            overrideSelectedCurrencyBalance={userLiquidityStaked}
-            customBalanceText={'Available to withdraw: '}
+            customBalanceText={'Available to deposit: '}
             id="stake-liquidity-token"
           />
 
           <RowBetween>
-            <ButtonError disabled={!!error} error={!!error && !!parsedAmount} onClick={onWithdraw}>
-              {error ?? 'Withdraw'}
+            <ButtonConfirmed
+              mr="0.5rem"
+              onClick={onAttemptToApprove}
+              confirmed={approval === ApprovalState.APPROVED}
+              disabled={approval !== ApprovalState.NOT_APPROVED}
+            >
+              Approve
+            </ButtonConfirmed>
+            <ButtonError
+              disabled={!!error || approval !== ApprovalState.APPROVED}
+              error={!!error && !!parsedAmount}
+              onClick={onStake}
+            >
+              {error ?? 'Deposit'}
             </ButtonError>
           </RowBetween>
+          <ProgressCircles steps={[approval === ApprovalState.APPROVED]} disabled={true} />
         </ContentWrapper>
       )}
       {attempting && !hash && !failed && (
         <LoadingView onDismiss={wrappedOnDismiss}>
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>
-              Withdrawing a{govToken?.symbol} from {pitSettings?.name}
+              Depositing {govToken?.symbol} to {dungeonSettings?.name}
             </TYPE.largeHeader>
             <TYPE.body fontSize={20}>
-              {parsedAmount?.toSignificant(4)} a{govToken?.symbol}
+              {parsedAmount?.toSignificant(4)} {govToken?.symbol}
             </TYPE.body>
           </AutoColumn>
         </LoadingView>
@@ -155,7 +180,7 @@ export default function ModifiedStakingModal({
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>Transaction Submitted</TYPE.largeHeader>
             <TYPE.body fontSize={20}>
-              Withdraw {parsedAmount?.toSignificant(4)} a{govToken?.symbol}
+              Deposited {parsedAmount?.toSignificant(4)} {govToken?.symbol}
             </TYPE.body>
           </AutoColumn>
         </SubmittedView>

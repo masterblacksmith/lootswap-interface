@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { RowBetween } from '../Row'
 import { TYPE, CloseIcon } from '../../theme'
 import { ButtonError } from '../Button'
-import { usePitBreederContract } from '../../hooks/useContract'
+import { useAutoLooterContract } from '../../hooks/useContract'
 import { SubmittedView, LoadingView } from '../ModalViews'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
@@ -15,11 +15,11 @@ import { abi as IUniswapV2PairABI } from '@venomswap/core/build/IUniswapV2Pair.j
 import { Interface } from '@ethersproject/abi'
 import { useMultipleContractSingleData } from '../../state/multicall/hooks'
 import { toV2LiquidityToken } from '../../state/user/hooks'
-import { PIT_SETTINGS } from '../../constants'
+import { DUNGEON_SETTINGS } from '../../constants'
 import useGovernanceToken from '../../hooks/useGovernanceToken'
 import useBlockchain from '../../hooks/useBlockchain'
-import { PIT_POOLS } from '../../constants/pit'
-import useEligiblePitPools from '../../hooks/useEligiblePitPools'
+import { DUNGEON_POOLS } from '../../constants/dungeon'
+import useEligibleDungeonPools from '../../hooks/useEligibleDungeonPools'
 
 const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
 
@@ -37,7 +37,7 @@ export default function ClaimModal({ isOpen, onDismiss }: ClaimModalProps) {
 
   const blockchain = useBlockchain()
   const govToken = useGovernanceToken()
-  const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
+  const dungeonSettings = chainId ? DUNGEON_SETTINGS[chainId] : undefined
 
   // monitor call to help UI loading state
   const addTransaction = useTransactionAdder()
@@ -52,8 +52,8 @@ export default function ClaimModal({ isOpen, onDismiss }: ClaimModalProps) {
     onDismiss()
   }
 
-  const pitBreeder = usePitBreederContract()
-  const stakingPools = useMemo(() => (chainId ? PIT_POOLS[chainId] : []), [chainId])
+  const autoLooter = useAutoLooterContract()
+  const stakingPools = useMemo(() => (chainId ? DUNGEON_POOLS[chainId] : []), [chainId])
 
   const liquidityTokenAddresses = useMemo(
     () =>
@@ -66,27 +66,27 @@ export default function ClaimModal({ isOpen, onDismiss }: ClaimModalProps) {
   ).filter(address => address !== undefined)
 
   const balanceResults = useMultipleContractSingleData(liquidityTokenAddresses, PAIR_INTERFACE, 'balanceOf', [
-    pitBreeder?.address
+    autoLooter?.address
   ])
 
-  const [claimFrom, claimTo] = useEligiblePitPools(stakingPools, balanceResults)
+  const [claimFrom, claimTo] = useEligibleDungeonPools(stakingPools, balanceResults)
 
   const rewardsAreClaimable = claimFrom.length > 0 && claimTo.length > 0
 
   async function onClaimRewards() {
-    if (pitBreeder) {
+    if (autoLooter) {
       setAttempting(true)
 
       try {
-        const estimatedGas = await pitBreeder.estimateGas.convertMultiple(claimFrom, claimTo)
+        const estimatedGas = await autoLooter.estimateGas.convertMultiple(claimFrom, claimTo)
 
-        await pitBreeder
+        await autoLooter
           .convertMultiple(claimFrom, claimTo, {
             gasLimit: calculateGasMargin(estimatedGas)
           })
           .then((response: TransactionResponse) => {
             addTransaction(response, {
-              summary: `Claim ${pitSettings?.name} rewards`
+              summary: `Claim ${dungeonSettings?.name} rewards`
             })
             setHash(response.hash)
           })
@@ -129,8 +129,8 @@ export default function ClaimModal({ isOpen, onDismiss }: ClaimModalProps) {
                 When you claim rewards, collected LP fees will be used to market buy {govToken?.symbol}.
                 <br />
                 <br />
-                The purchased {govToken?.symbol} tokens will then be distributed to the {pitSettings?.name} stakers as a
-                reward.
+                The purchased {govToken?.symbol} tokens will then be distributed to the {dungeonSettings?.name} stakers
+                as a reward.
               </TYPE.body>
               <ButtonError disabled={!!error} error={!!error} onClick={onClaimRewards}>
                 {error ?? 'Claim'}
@@ -152,7 +152,7 @@ export default function ClaimModal({ isOpen, onDismiss }: ClaimModalProps) {
       {attempting && !hash && !failed && (
         <LoadingView onDismiss={wrappedOnDismiss}>
           <AutoColumn gap="12px" justify={'center'}>
-            <TYPE.body fontSize={20}>Claiming {pitSettings?.name} rewards</TYPE.body>
+            <TYPE.body fontSize={20}>Claiming {dungeonSettings?.name} rewards</TYPE.body>
           </AutoColumn>
         </LoadingView>
       )}
