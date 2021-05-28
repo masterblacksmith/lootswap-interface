@@ -3,14 +3,14 @@ import { abi as GOVERNANCE_ABI } from '@uniswap/governance/build/GovernorAlpha.j
 import { abi as UNI_ABI } from '@uniswap/governance/build/Uni.json'
 import { abi as GOVERNANCE_TOKEN_ABI } from '@venomswap/contracts/build/GovernanceToken.json'
 import { abi as STAKING_REWARDS_ABI } from '@uniswap/liquidity-staker/build/StakingRewards.json'
-import { abi as MASTER_BREEDER_ABI } from '@venomswap/contracts/build/MasterBreeder.json'
+import { abi as MASTER_LOOTER_ABI } from '@venomswap/contracts/build/MasterBreeder.json'
 import { abi as DUNGEON_ABI } from '@venomswap/contracts/build/Pit.json'
 import { abi as AUTO_LOOTER_ABI } from '@venomswap/contracts/build/PitBreeder.json'
 import { abi as MERKLE_DISTRIBUTOR_ABI } from '@uniswap/merkle-distributor/build/MerkleDistributor.json'
 import { ChainId, WETH } from '@venomswap/sdk'
 import { abi as IUniswapV2PairABI } from '@venomswap/core/build/IUniswapV2Pair.json'
 import { useMemo } from 'react'
-import { GOVERNANCE_ADDRESS, MERKLE_DISTRIBUTOR_ADDRESS, MASTER_BREEDER, DUNGEON, AUTO_LOOTER } from '../constants'
+import { GOVERNANCE_ADDRESS, MERKLE_DISTRIBUTOR_ADDRESS, MASTER_LOOTER, DUNGEON, AUTO_LOOTER } from '../constants'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
   ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS
@@ -140,8 +140,8 @@ export function useStakingContract(stakingAddress?: string, withSignerIfPossible
 
 export function useMasterLooterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  const address = chainId && MASTER_BREEDER[chainId]
-  return useContract(address, MASTER_BREEDER_ABI, withSignerIfPossible)
+  const address = chainId && MASTER_LOOTER[chainId]
+  return useContract(address, MASTER_LOOTER_ABI, withSignerIfPossible)
 }
 
 export function useSocksController(): Contract | null {

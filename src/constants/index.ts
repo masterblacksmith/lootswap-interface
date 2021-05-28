@@ -26,13 +26,13 @@ export const GOVERNANCE_ADDRESS = '0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F'
 export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
 export const GOVERNANCE_TOKEN: { [chainId in ChainId]: Token } = {
-  [ChainId.MAINNET]: new Token(ChainId.MAINNET, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Viper'),
-  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Viper'),
-  [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Viper'),
-  [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Viper'),
-  [ChainId.KOVAN]: new Token(ChainId.KOVAN, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Viper'),
-  [ChainId.BSC_MAINNET]: new Token(ChainId.BSC_MAINNET, ZERO_ONE_ADDRESS, 18, 'COBRA', 'Cobra'),
-  [ChainId.BSC_TESTNET]: new Token(ChainId.BSC_TESTNET, ZERO_ONE_ADDRESS, 18, 'COBRA', 'Cobra'),
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Loot'),
+  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Loot'),
+  [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Loot'),
+  [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Loot'),
+  [ChainId.KOVAN]: new Token(ChainId.KOVAN, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Loot'),
+  [ChainId.BSC_MAINNET]: new Token(ChainId.BSC_MAINNET, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Loot'),
+  [ChainId.BSC_TESTNET]: new Token(ChainId.BSC_TESTNET, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Loot'),
   [ChainId.HARMONY_MAINNET]: new Token(
     ChainId.HARMONY_MAINNET,
     '0x32eD93e5331AaA092E1817FbFd3C4d80647F8f04',
@@ -40,10 +40,10 @@ export const GOVERNANCE_TOKEN: { [chainId in ChainId]: Token } = {
     'LOOT',
     'Loot'
   ),
-  [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Viper')
+  [ChainId.HARMONY_TESTNET]: new Token(ChainId.HARMONY_TESTNET, ZERO_ONE_ADDRESS, 18, 'LOOT', 'Loot')
 }
 
-export const MASTER_BREEDER: { [chainId in ChainId]: string } = {
+export const MASTER_LOOTER: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: ZERO_ONE_ADDRESS,
   [ChainId.RINKEBY]: ZERO_ONE_ADDRESS,
   [ChainId.ROPSTEN]: ZERO_ONE_ADDRESS,
