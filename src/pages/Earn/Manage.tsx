@@ -132,7 +132,7 @@ export default function Manage({
   // fade cards if nothing staked or nothing earned yet
   const disableTop = !stakingInfo?.stakedAmount || stakingInfo.stakedAmount.equalTo(JSBI.BigInt(0))
 
-  const backgroundColor = useColor(stakingInfo.baseToken)
+  const backgroundColor = useColor(stakingInfo?.baseToken)
 
   const countUpAmount = stakingInfo?.earnedAmount?.toFixed(6) ?? '0'
   const countUpAmountPrevious = usePrevious(countUpAmount) ?? '0'
