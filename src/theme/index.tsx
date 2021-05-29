@@ -10,7 +10,7 @@ import { Text, TextProps } from 'rebass'
 import { Colors } from './styled'
 
 import useBlockchain from '../hooks/useBlockchain'
-import { Blockchain } from '@venomswap/sdk'
+import { Blockchain } from '@lootswap/sdk'
 import bgimage from '../assets/images/loot_background.png'
 
 export * from './components'

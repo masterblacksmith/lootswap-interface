@@ -35,7 +35,7 @@ import { DUNGEON_SETTINGS } from '../constants'
 import { useActiveWeb3React } from '../hooks'
 import usePlatformName from '../hooks/usePlatformName'
 
-import { Blockchain } from '@venomswap/sdk'
+import { Blockchain } from '@lootswap/sdk'
 import useBlockchain from '../hooks/useBlockchain'
 
 const AppWrapper = styled.div`

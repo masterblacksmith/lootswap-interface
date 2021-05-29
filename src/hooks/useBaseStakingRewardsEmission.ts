@@ -1,4 +1,4 @@
-import { JSBI, TokenAmount } from '@venomswap/sdk'
+import { JSBI, TokenAmount } from '@lootswap/sdk'
 import { useSingleCallResult } from '../state/multicall/hooks'
 import { useMasterLooterContract } from './useContract'
 import useGovernanceToken from './useGovernanceToken'

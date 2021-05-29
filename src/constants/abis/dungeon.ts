@@ -1,5 +1,5 @@
 import { Interface } from '@ethersproject/abi'
-import { abi as DUNGEON_ABI } from '@venomswap/contracts/build/Pit.json'
+import { abi as DUNGEON_ABI } from '@lootswap/contracts/build/Quests.json'
 
 const DUNGEON_INTERFACE = new Interface(DUNGEON_ABI)
 

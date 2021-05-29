@@ -1,4 +1,4 @@
-import { Blockchain } from '@venomswap/sdk'
+import { Blockchain } from '@lootswap/sdk'
 import { BLOCKCHAIN } from '../connectors'
 import lootSwapTokenLogo from '../assets/images/loot_diamond.png'
 

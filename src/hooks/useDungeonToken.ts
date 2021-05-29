@@ -1,4 +1,4 @@
-import { Token } from '@venomswap/sdk'
+import { Token } from '@lootswap/sdk'
 import { DUNGEON } from '../constants'
 import { useActiveWeb3React } from './index'
 

@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@venomswap/sdk'
+import { ChainId, Token } from '@lootswap/sdk'
 import getPairTokensWithDefaults from '../utils/getPairTokensWithDefaults'
 
 export const DUNGEON_POOLS: {
