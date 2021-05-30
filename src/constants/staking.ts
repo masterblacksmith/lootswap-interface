@@ -7,20 +7,7 @@ export const STAKING_REWARDS_INFO: {
     tokens: [Token, Token]
   }[]
 } = {
-  [ChainId.HARMONY_MAINNET]: [
-    {
-      pid: 0,
-      tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'WONE/BUSD')
-    },
-    {
-      pid: 1,
-      tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'WONE/1SUSHI')
-    },
-    {
-      pid: 2,
-      tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'LOOT/WONE')
-    }
-  ],
+  [ChainId.HARMONY_MAINNET]: [],
   [ChainId.HARMONY_TESTNET]: [
     {
       pid: 0,

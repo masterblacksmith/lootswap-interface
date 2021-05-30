@@ -1,5 +1,5 @@
 {
-    "name": "Venomswap Default",
+    "name": "Lootswap Default",
     "timestamp": "2021-05-29T09:01:04.212Z",
     "version": {
       "major": 2,
@@ -7,9 +7,9 @@
       "patch": 0
     },
     "tags": {},
-    "logoURI": "https://dvwecb5klcqus.cloudfront.net/venomswap/logos/venomswap-128x128.png",
+    "logoURI": "https://lootswap.finance/tokens/LOOT.png",
     "keywords": [
-      "venomswap",
+      "lootswap",
       "default"
     ],
     "tokens": [
@@ -259,7 +259,7 @@
         "symbol": "11INCH",
         "name": "1INCH Token",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/11INCH.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/11INCH.png"
       },
       {
         "chainId": 1666600000,
@@ -267,7 +267,7 @@
         "symbol": "1AAVE",
         "name": "Aave Token",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1AAVE.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/1AAVE.png"
       },
       {
         "chainId": 1666600000,
@@ -283,7 +283,7 @@
         "symbol": "1DSLA",
         "name": "DSLA",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1DSLA.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/1DSLA.png"
       },
       {
         "chainId": 1666600000,
@@ -299,7 +299,7 @@
         "symbol": "1MATIC",
         "name": "Matic Token",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1MATIC.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/1MATIC.png"
       },
       {
         "chainId": 1666600000,
@@ -307,7 +307,7 @@
         "symbol": "1SNX",
         "name": "Synthetix Network Token",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1SNX.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/1SNX.png"
       },
       {
         "chainId": 1666600000,
@@ -315,7 +315,7 @@
         "symbol": "1SUSHI",
         "name": "SushiToken",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1SUSHI.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/1SUSHI.png"
       },
       {
         "chainId": 1666600000,
@@ -323,7 +323,7 @@
         "symbol": "1UNI",
         "name": "Uniswap",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1UNI.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/1UNI.png"
       },
       {
         "chainId": 1666600000,
@@ -355,7 +355,7 @@
         "symbol": "1WISE",
         "name": "Wise Token",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1WISE.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/1WISE.png"
       },
       {
         "chainId": 1666600000,
@@ -363,7 +363,7 @@
         "symbol": "1YFI",
         "name": "yearn.finance",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1YFI.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/1YFI.png"
       },
       {
         "chainId": 1666600000,
@@ -379,7 +379,7 @@
         "symbol": "bscCAKE",
         "name": "PancakeSwap Token",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/bscCAKE.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/bscCAKE.png"
       },
       {
         "chainId": 1666600000,
@@ -395,7 +395,7 @@
         "symbol": "hMOCHI",
         "name": "MochiSwap Token",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/HMOCHI.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/HMOCHI.png"
       },
       {
         "chainId": 1666600000,
@@ -403,7 +403,7 @@
         "symbol": "JENN",
         "name": "TokenJenny",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/JENN.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/JENN.png"
       },
       {
         "chainId": 1666600000,
@@ -419,11 +419,11 @@
         "symbol": "oSWAP",
         "name": "OpenSwap Token",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/OSWAP.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/OSWAP.png"
       },
       {
         "chainId": 1666600000,
-        "address": "0xCb14544950B6d81b9D0ff73af7876E50d64d6e8E",
+        "address": "0xbDa99C8695986B45a0dD3979cC6f3974D9753D30",
         "symbol": "LOOT",
         "name": "Loot",
         "decimals": 18,
@@ -443,7 +443,7 @@
         "symbol": "XYA",
         "name": "Freyala",
         "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/XYA.png"
+        "logoURI": "https://alpha.lootswap.finance/tokens/XYA.png"
       },
       {
         "chainId": 1666700000,
