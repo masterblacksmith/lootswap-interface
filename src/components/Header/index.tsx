@@ -377,7 +377,7 @@ export default function Header() {
           </StyledNavLink>
           {showEarn && (
             <StyledNavLink id={`stake-nav-link`} to={'/staking'}>
-              Staking
+              Quests
             </StyledNavLink>
           )}
           {showEarn && (

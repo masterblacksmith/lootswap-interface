@@ -155,8 +155,8 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
               <BlueCard>
                 <AutoColumn gap="10px">
                   <TYPE.link fontWeight={400} color={'primaryText1'}>
-                    <b>Important:</b> There&apos;s a <b>0.75% deposit fee</b> when depositing funds to the liquidity
-                    farming pools.
+                    <b>Important:</b> There&apos;s <b>no deposit fee</b> when depositing funds to the liquidity farming
+                    pools.
                     <br />
                     <br />
                     These fees are rewarded to the treasury which is owned by the {govToken?.symbol} DAO and its users.

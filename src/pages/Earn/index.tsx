@@ -111,7 +111,7 @@ export default function Earn() {
 
       <AutoColumn gap="lg" style={{ width: '100%', maxWidth: '720px' }}>
         <DataRow style={{ alignItems: 'baseline' }}>
-          <TYPE.mediumHeader style={{ marginTop: '0.5rem' }}>Pools</TYPE.mediumHeader>
+          <TYPE.mediumHeader style={{ marginTop: '0.5rem' }}>Quests</TYPE.mediumHeader>
           {TVLs && TVLs.totalCombinedTVL && TVLs.totalCombinedTVL.greaterThan('0') && (
             <TYPE.black style={{ marginTop: '0.5rem' }}>
               <span role="img" aria-label="wizard-icon" style={{ marginRight: '0.5rem' }}>

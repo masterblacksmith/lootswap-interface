@@ -29,12 +29,7 @@ export const DUNGEON_POOLS: {
       tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'LOOT/WONE')
     }
   ],
-  [ChainId.HARMONY_TESTNET]: [
-    {
-      pid: 0,
-      tokens: getPairTokensWithDefaults(ChainId.HARMONY_TESTNET, 'WONE/BUSD')
-    }
-  ],
+  [ChainId.HARMONY_TESTNET]: [],
   [ChainId.BSC_TESTNET]: [
     {
       pid: 0,
