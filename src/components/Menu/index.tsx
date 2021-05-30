@@ -111,7 +111,7 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://analytics.lootswap.finance">
+          <MenuItem id="link" href="https://lootswap.finance">
             <PieChart size={14} />
             Analytics
           </MenuItem>

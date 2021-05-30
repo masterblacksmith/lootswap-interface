@@ -295,27 +295,11 @@
       },
       {
         "chainId": 1666600000,
-        "address": "0xBfD4F1699b83eDBa1106B6E224b7aC599A40be1F",
-        "symbol": "1MAGGOT",
-        "name": "MaggotToken",
-        "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1MAGGOT.png"
-      },
-      {
-        "chainId": 1666600000,
         "address": "0x301259f392B551CA8c592C9f676FCD2f9A0A84C5",
         "symbol": "1MATIC",
         "name": "Matic Token",
         "decimals": 18,
         "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1MATIC.png"
-      },
-      {
-        "chainId": 1666600000,
-        "address": "0xFd2a8F8cF7CFFeA4a613F1DFf39b22881D4a1f92",
-        "symbol": "1ROT",
-        "name": "RottenToken",
-        "decimals": 18,
-        "logoURI": "https://d1xrz6ki9z98vb.cloudfront.net/venomswap/tokens/1ROT.png"
       },
       {
         "chainId": 1666600000,

@@ -107,7 +107,6 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 export function getRouterContract(chainId: number, library: Web3Provider, account?: string): Contract {
   const convertedChainId = chainId as ChainId
   const routerAddress = (chainId && ROUTER_ADDRESSES[convertedChainId]) as string
-  console.log('router address', routerAddress)
   return getContract(routerAddress, IUniswapV2Router02ABI, library, account)
 }
 

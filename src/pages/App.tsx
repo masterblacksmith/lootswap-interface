@@ -97,7 +97,7 @@ export default function App() {
   }, [platformName])
 
   const comingSoon = false
-  const showWarning = false
+  const showWarning = true
 
   return (
     <Suspense fallback={null}>
