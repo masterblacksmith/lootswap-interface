@@ -259,7 +259,7 @@
         "symbol": "11INCH",
         "name": "1INCH Token",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/11INCH.png"
+        "logoURI": "https://lootswap.finance/tokens/11INCH.png"
       },
       {
         "chainId": 1666600000,
@@ -267,7 +267,7 @@
         "symbol": "1AAVE",
         "name": "Aave Token",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/1AAVE.png"
+        "logoURI": "https://lootswap.finance/tokens/1AAVE.png"
       },
       {
         "chainId": 1666600000,
@@ -283,7 +283,7 @@
         "symbol": "1DSLA",
         "name": "DSLA",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/1DSLA.png"
+        "logoURI": "https://lootswap.finance/tokens/1DSLA.png"
       },
       {
         "chainId": 1666600000,
@@ -299,7 +299,7 @@
         "symbol": "1MATIC",
         "name": "Matic Token",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/1MATIC.png"
+        "logoURI": "https://lootswap.finance/tokens/1MATIC.png"
       },
       {
         "chainId": 1666600000,
@@ -307,7 +307,7 @@
         "symbol": "1SNX",
         "name": "Synthetix Network Token",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/1SNX.png"
+        "logoURI": "https://lootswap.finance/tokens/1SNX.png"
       },
       {
         "chainId": 1666600000,
@@ -315,7 +315,7 @@
         "symbol": "1SUSHI",
         "name": "SushiToken",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/1SUSHI.png"
+        "logoURI": "https://lootswap.finance/tokens/1SUSHI.png"
       },
       {
         "chainId": 1666600000,
@@ -323,7 +323,7 @@
         "symbol": "1UNI",
         "name": "Uniswap",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/1UNI.png"
+        "logoURI": "https://lootswap.finance/tokens/1UNI.png"
       },
       {
         "chainId": 1666600000,
@@ -355,7 +355,7 @@
         "symbol": "1WISE",
         "name": "Wise Token",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/1WISE.png"
+        "logoURI": "https://lootswap.finance/tokens/1WISE.png"
       },
       {
         "chainId": 1666600000,
@@ -363,7 +363,7 @@
         "symbol": "1YFI",
         "name": "yearn.finance",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/1YFI.png"
+        "logoURI": "https://lootswap.finance/tokens/1YFI.png"
       },
       {
         "chainId": 1666600000,
@@ -375,11 +375,19 @@
       },
       {
         "chainId": 1666600000,
+        "address": "0xb1f6E61E1e113625593a22fa6aa94F8052bc39E0",
+        "symbol": "bscBNB",
+        "name": "BNB Token",
+        "decimals": 18,
+        "logoURI": "https://lootswap.finance/tokens/BNB.png"
+      },
+      {
+        "chainId": 1666600000,
         "address": "0x3e9D32580B0BF3aE72AFCBEbC68710d2Fd9a18F0",
         "symbol": "bscCAKE",
         "name": "PancakeSwap Token",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/bscCAKE.png"
+        "logoURI": "https://lootswap.finance/tokens/bscCAKE.png"
       },
       {
         "chainId": 1666600000,
@@ -395,7 +403,7 @@
         "symbol": "hMOCHI",
         "name": "MochiSwap Token",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/HMOCHI.png"
+        "logoURI": "https://lootswap.finance/tokens/HMOCHI.png"
       },
       {
         "chainId": 1666600000,
@@ -403,7 +411,7 @@
         "symbol": "JENN",
         "name": "TokenJenny",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/JENN.png"
+        "logoURI": "https://lootswap.finance/tokens/JENN.png"
       },
       {
         "chainId": 1666600000,
@@ -419,7 +427,7 @@
         "symbol": "oSWAP",
         "name": "OpenSwap Token",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/OSWAP.png"
+        "logoURI": "https://lootswap.finance/tokens/OSWAP.png"
       },
       {
         "chainId": 1666600000,
@@ -427,7 +435,7 @@
         "symbol": "LOOT",
         "name": "Loot",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/LOOT-LP.png"
+        "logoURI": "https://lootswap.finance/tokens/LOOT-LP.png"
       },
       {
         "chainId": 1666600000,
@@ -443,7 +451,7 @@
         "symbol": "XYA",
         "name": "Freyala",
         "decimals": 18,
-        "logoURI": "https://alpha.lootswap.finance/tokens/XYA.png"
+        "logoURI": "https://lootswap.finance/tokens/XYA.png"
       },
       {
         "chainId": 1666700000,
