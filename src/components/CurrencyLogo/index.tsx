@@ -14,8 +14,7 @@ import useBlockchain from '../../hooks/useBlockchain'
 export const getTokenLogoURL = (address: string) =>
   `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
 
-export const getTokenFallbackLogoURL = (currency: Currency) =>
-  `https://alpha.lootswap.finance/tokens/${currency.symbol}.png`
+export const getTokenFallbackLogoURL = (currency: Currency) => `https://lootswap.finance/tokens/${currency.symbol}.png`
 
 const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};
@@ -37,7 +36,7 @@ export default function CurrencyLogo({
   size = '24px',
   style
 }: {
-  currency?: Currency
+  currency?: any
   size?: string
   style?: React.CSSProperties
 }) {
@@ -47,7 +46,7 @@ export default function CurrencyLogo({
   const srcs: string[] = useMemo(() => {
     if (currency && DEFAULT_CURRENCIES.includes(currency)) return []
 
-    if (currency instanceof Token) {
+    if (currency && currency.address) {
       const logoUrlLocation = [56, 97, 1666600000, 1666700000].includes(currency.chainId)
         ? getTokenFallbackLogoURL(currency)
         : getTokenLogoURL(currency.address)
