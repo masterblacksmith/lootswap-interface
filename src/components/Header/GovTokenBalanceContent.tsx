@@ -8,9 +8,9 @@ import { useGovTokenSupply } from '../../data/TotalSupply'
 import { useActiveWeb3React } from '../../hooks'
 //import { useMerkleDistributorContract } from '../../hooks/useContract'
 //import useCurrentBlockTimestamp from '../../hooks/useCurrentBlockTimestamp'
-import { useTotalUnlockedGovTokensEarned } from '../../state/stake/hooks'
+import { useTotalLockedGovTokensEarned, useTotalUnlockedGovTokensEarned } from '../../state/stake/hooks'
 import { useAggregateGovTokenBalance, useTokenBalance } from '../../state/wallet/hooks'
-import { StyledInternalLink, TYPE, UniTokenAnimated } from '../../theme'
+import { TYPE, UniTokenAnimated } from '../../theme'
 //import { computeUniCirculation } from '../../utils/computeUniCirculation'
 import useBUSDPrice from '../../hooks/useBUSDPrice'
 import { AutoColumn } from '../Column'
@@ -71,6 +71,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
     'totalBalanceOf',
     GOVERNANCE_TOKEN_INTERFACE
   )
+  const lockedGovTokensToClaim: TokenAmount | undefined = useTotalLockedGovTokensEarned()
   const unlockedGovTokensToClaim: TokenAmount | undefined = useTotalUnlockedGovTokensEarned()
   const totalSupply: TokenAmount | undefined = useGovTokenSupply()
   const totalUnlockedSupply: TokenAmount | undefined = useGovTokenSupply('unlockedSupply')
@@ -126,16 +127,27 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
                 </RowBetween>
                 <RowBetween>
                   <TYPE.white color="white">
-                    <MouseoverTooltip text={tooltips.unlockedRewards}>Pending Rewards:</MouseoverTooltip>
+                    <MouseoverTooltip text={tooltips.unlockedRewards}>
+                      <span role="img" aria-label="wizard-icon" style={{ marginRight: '0.5rem' }}>
+                        🔓
+                      </span>
+                      Pending Rewards:
+                    </MouseoverTooltip>
                   </TYPE.white>
                   <TYPE.white color="white">
                     {unlockedGovTokensToClaim?.toFixed(2, { groupSeparator: ',' })}{' '}
-                    {unlockedGovTokensToClaim && unlockedGovTokensToClaim.greaterThan('0') && (
-                      <StyledInternalLink onClick={() => setShowUniBalanceModal(false)} to="/staking">
-                        (claim)
-                      </StyledInternalLink>
-                    )}
                   </TYPE.white>
+                </RowBetween>
+                <RowBetween>
+                  <TYPE.white color="white">
+                    <MouseoverTooltip text={tooltips.lockedRewards}>
+                      <span role="img" aria-label="wizard-icon" style={{ marginRight: '0.5rem' }}>
+                        🔒
+                      </span>
+                      Pending Rewards:
+                    </MouseoverTooltip>
+                  </TYPE.white>
+                  <TYPE.white color="white">{lockedGovTokensToClaim?.toFixed(2, { groupSeparator: ',' })} </TYPE.white>
                 </RowBetween>
               </AutoColumn>
             </CardSection>
@@ -186,6 +198,10 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
             <RowBetween>
               <TYPE.white color="white">{govToken?.symbol} in circulation:</TYPE.white>
               <TYPE.white color="white">{totalUnlockedSupply?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
+            </RowBetween>
+            <RowBetween>
+              <TYPE.white color="white">{govToken?.symbol} total supply:</TYPE.white>
+              <TYPE.white color="white">{totalSupply?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
             </RowBetween>
           </AutoColumn>
         </CardSection>

@@ -2,12 +2,8 @@ import { ChainId, Currency, CurrencyAmount, Token, TokenAmount, WETH, DEFAULT_CU
 
 import baseCurrencies from '../utils/baseCurrencies'
 
-export function wrappedCurrency(currency: Currency | undefined, chainId: ChainId | undefined): Token | undefined {
-  return chainId && currency && DEFAULT_CURRENCIES.includes(currency)
-    ? WETH[chainId]
-    : currency instanceof Token
-    ? currency
-    : undefined
+export function wrappedCurrency(currency: any | undefined, chainId: ChainId | undefined): Token | undefined {
+  return chainId && currency && DEFAULT_CURRENCIES.includes(currency) ? WETH[chainId] : currency ? currency : undefined
 }
 
 export function wrappedCurrencyAmount(
