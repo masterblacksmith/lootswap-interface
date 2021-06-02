@@ -127,9 +127,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
                 </RowBetween>
                 <RowBetween>
                   <TYPE.white color="white">
-                    <MouseoverTooltip text={tooltips.unlockedRewards}>
-                      Pending Rewards:
-                    </MouseoverTooltip>
+                    <MouseoverTooltip text={tooltips.unlockedRewards}>Pending Rewards:</MouseoverTooltip>
                   </TYPE.white>
                   <TYPE.white color="white">
                     {unlockedGovTokensToClaim?.toFixed(2, { groupSeparator: ',' })}{' '}
@@ -137,9 +135,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
                 </RowBetween>
                 <RowBetween>
                   <TYPE.white color="white">
-                    <MouseoverTooltip text={tooltips.lockedRewards}>
-                      Pending Locked Rewards:
-                    </MouseoverTooltip>
+                    <MouseoverTooltip text={tooltips.lockedRewards}>Pending Locked Rewards:</MouseoverTooltip>
                   </TYPE.white>
                   <TYPE.white color="white">{lockedGovTokensToClaim?.toFixed(2, { groupSeparator: ',' })} </TYPE.white>
                 </RowBetween>
